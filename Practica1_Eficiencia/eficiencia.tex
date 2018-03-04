@@ -41,15 +41,26 @@
 
 \tableofcontents
 
+\newpage
 \section{Eficiencia Empírica}
 
-\begin{table}[H]
-\begin{minipage}{0.45\linewidth}
-\centering
-\title{\large Algoritmos con eficiencia $O(n^2)$\vspace{4mm}}
-\begin{tabular}{| c c c c |}
-\hline
-$\textbf{n}$ & \textbf{Burbuja} & \textbf{Inserción} & \textbf{Selección} \\ \hline
+\subsection{Algoritmos de ordenación}
+
+\begin{flushleft}
+  He medido los tiempos de ejecución de los distintos algoritmos de
+  ordenación para varios tamaños de vector, y he obtenido los
+  siguientes resultados.
+\end{flushleft}
+
+\begin{figure}[!hbp]
+  \centering
+  \mbox{
+    \subfigure[Algoritmos con eficiencia $O(n^2)$]{
+      \label{tab:n2}
+      \begin{tabular}{| c c c c |}
+        \hline
+        \multicolumn{1}{|c}{$\textbf{n}$}& \textbf{Burbuja}&
+\textbf{Inserción}& \textbf{Selección} \\ \hline
   1000  & 0.004416 & 0.001242 & 0.00132932 \\ 
   2000  & 0.009701 & 0.005147 & 0.00472456 \\ 
   3000  & 0.021534 & 0.012807 & 0.010695   \\ 
@@ -75,17 +86,15 @@ $\textbf{n}$ & \textbf{Burbuja} & \textbf{Inserción} & \textbf{Selección} \\ \
   23000 & 1.37147  & 0.491561 & 0.608983   \\
   24000 & 1.53636  & 0.537183 & 0.662848   \\
   25000 & 1.67428  & 0.586868 & 0.719359   \\ \hline
-\end{tabular}
-\end{minipage}
+      \end{tabular}
+    }
+    
+    \qquad
 
-\hfill
-
-\begin{minipage}{0.45\linewidth}
-\centering
-\title{\large Algoritmos con eficiencia $O(n\log n)$\vspace{4mm}}
-\begin{tabular}{| c c c c |}
-\hline
-$\textbf{n}$ & \textbf{Mergesort} & \textbf{Quicksort} & \textbf{Heapsort} \\ \hline
+    \subfigure[\vspace{1mm}Algoritmos con eficiencia $O(n\log n)$]{
+      \label{tab:nlogn}
+      \begin{tabular}{|rlll|} \hline \multicolumn{1}{|c}{$\textbf{n}$}&
+\textbf{Mergesort}& \textbf{Quicksort}& \textbf{Heapsort}\\\hline
   1000  & 0.000111503 & 0.000349 & 0.000452 \\ 
   2000  & 0.000235082 & 0.000921 & 0.001106 \\ 
   3000  & 0.000433307 & 0.000349 & 0.001416 \\ 
@@ -112,103 +121,146 @@ $\textbf{n}$ & \textbf{Mergesort} & \textbf{Quicksort} & \textbf{Heapsort} \\ \h
   24000 & 0.004311    & 0.002889 & 0.003566 \\
   25000 & 0.004956    & 0.002906 & 0.003972 \\ \hline
 \end{tabular}
-\end{minipage}
-\end{table}
+}
+}
+\end{figure}
 
-\begin{table}[H]
-\begin{minipage}{0.4\textwidth}
-\centering
-\title{\large Algoritmos con eficiencia $O(n^3)$ \\ \vspace{4mm}}
-\begin{tabular}{| c c |}
-\hline
-$\textbf{n}$ & \textbf{Floyd} \\ \hline
-  100  & 0.007701 \\ 
-  200  & 0.046747 \\ 
-  300  & 0.132648 \\ 
-  400  & 0.308783 \\ 
-  500  & 0.602721 \\ 
-  600  & 1.03593  \\ 
-  700  & 1.64485  \\ 
-  800  & 2.44615  \\ 
-  900  & 3.609    \\ 
-  1000 & 4.7692   \\ 
-  1100 & 6.35587  \\ 
-  1200 & 8.29301  \\ 
-  1300 & 10.4978  \\
-  1400 & 13.1335  \\
-  1500 & 16.3889  \\
-  1600 & 19.623   \\
-  1700 & 23.5916  \\
-  1800 & 28.0699  \\
-  1900 & 32.8918  \\
-  2000 & 38.2142  \\
-  2100 & 44.9125  \\
-  2200 & 50.9494  \\
-  2300 & 58.9452  \\
-  2400 & 66.1602  \\
-  2500 & 74.5625  \\ \hline
-\end{tabular}
-\end{minipage}
+\begin{flushleft}
+  Puede apreciarse como el tiempo de ejecución de los algoritmos
+  $O(n\log n)$ es notablemente menor que el de los algoritmos de orden
+  $O(n^2)$. \\
+  Dentro de los cuadráticos, el algoritmo de burbuja es notablemente
+  peor en todos los casos. Mientras que en los $O(n\log n)$, el
+  mergesort es ligeramente peor, y el quicksort es el más eficiente de
+  los tres, sobre todo para tamaños grandes.
+\end{flushleft}
 
-\hfill
+\newpage
+\subsection{Algoritmos de Floyd y Hanoi}
 
-\begin{minipage}{0.4\textwidth}
-\centering
-\title{\large Algoritmos con eficiencia $O(2^n)$ \\ \vspace{4mm}}
-\begin{tabular}{| c c |}
-\hline
-$\textbf{n}$ & \textbf{Hanoi} \\ \hline
-  10 &	2.8e-05  \\
-  11 &	5.3e-05  \\
-  12 &	0.000101 \\
-  13 &	5.4e-05  \\
-  14 &	0.000108 \\
-  15 &	0.000221 \\
-  16 &	0.000457 \\
-  17 & 	0.000909 \\
-  18 &	0.001828 \\
-  19 &	0.003638 \\
-  20 &	0.007117 \\
-  21 &	0.012896 \\
-  22 &	0.025344 \\
-  23 &	0.04889  \\
-  24 &	0.090453 \\
-  25 &	0.181502 \\
-  26 &	0.361282 \\
-  27 &	0.739665 \\
-  28 &	1.43885  \\
-  29 &	2.87849  \\
-  30 &	5.8083   \\
-  31 &	11.5332  \\
-  32 &	23.0484  \\
-  33 &	46.2319  \\
-  34 &	93.0055  \\
-  35 &	184.521  \\ \hline
-\end{tabular}
-\end{minipage}
-\end{table}
+\begin{figure}[!hbp]
+  \centering
+  \mbox{
+    \subfigure[Algoritmos con eficiencia $O(n^3)$]{
+      \label{tab:n3}
+      \begin{tabular}{| c c |}
+        \hline
+        \multicolumn{1}{|c}{$\textbf{n}$} & \textbf{Floyd} \\ \hline
+        100  & 0.007701 \\ 
+        200  & 0.046747 \\ 
+        300  & 0.132648 \\ 
+        400  & 0.308783 \\ 
+        500  & 0.602721 \\ 
+        600  & 1.03593  \\ 
+        700  & 1.64485  \\ 
+        800  & 2.44615  \\ 
+        900  & 3.609    \\ 
+        1000 & 4.7692   \\ 
+        1100 & 6.35587  \\ 
+        1200 & 8.29301  \\ 
+        1300 & 10.4978  \\
+        1400 & 13.1335  \\
+        1500 & 16.3889  \\
+        1600 & 19.623   \\
+        1700 & 23.5916  \\
+        1800 & 28.0699  \\
+        1900 & 32.8918  \\
+        2000 & 38.2142  \\
+        2100 & 44.9125  \\
+        2200 & 50.9494  \\
+        2300 & 58.9452  \\
+        2400 & 66.1602  \\
+        2500 & 74.5625  \\ \hline
+      \end{tabular}
+      }
 
-\section{Gráficos}
+      \qquad
+
+      \subfigure[\vspace{1mm}Algoritmos con eficiencia $O(2^n)$]{
+        \label{tab:nlogn}
+        \begin{tabular}{| c c |}
+          \hline
+          \multicolumn{1}{|c}{$\textbf{n}$} & \textbf{Hanoi} \\ \hline
+          10 &	2.8e-05  \\
+          11 &	5.3e-05  \\
+          12 &	0.000101 \\
+          13 &	5.4e-05  \\
+          14 &	0.000108 \\
+          15 &	0.000221 \\
+          16 &	0.000457 \\
+          17 & 	0.000909 \\
+          18 &	0.001828 \\
+          19 &	0.003638 \\
+          20 &	0.007117 \\
+          21 &	0.012896 \\
+          22 &	0.025344 \\
+          23 &	0.04889  \\
+          24 &	0.090453 \\
+          25 &	0.181502 \\
+          26 &	0.361282 \\
+          27 &	0.739665 \\
+          28 &	1.43885  \\
+          29 &	2.87849  \\
+          30 &	5.8083   \\
+          31 &	11.5332  \\
+          32 &	23.0484  \\
+          33 &	46.2319  \\
+          34 &	93.0055  \\
+          35 &	184.521  \\ \hline
+        \end{tabular}
+        }
+      }
+    \end{figure}
+
+    \begin{flushleft}
+      Puede apreciarse como los tiempos crecen mucho más rápido que en
+      los anteriores algoritmos, sobre todo en el caso de
+      Hanoi. Además, he tenido que reducir los rangos de valores para
+      que se ejecuten en un tiempo razonable.
+    \end{flushleft}
+
+    \section{Gráficos}
+    \setcounter{subfigure}{0}
+
+    \begin{flushleft}
+      A continuación expongo distintos gráficos donde puede apreciarse
+      las comparaciones entre los distintos algoritmos. En cada
+      gráfico represento los algoritmos con el mismo orden de
+      eficiencia, excepto en el úlimo gráfico, que represento los
+      tiempos de todos los algoritmos de ordenación juntos, y puede
+      apreciarse cómo los tiempos de los de orden $O(n\log n)$ son
+      insignificantes en comparación con los tiempos de los algoritmos
+      de orden cuadrático.
+    \end{flushleft}
 
 \begin{figure}[H]
   \centering
-  \subfigure[Algoritmos con eficiencia $O(n^2)$]{\includegraphics[width=70mm]{graficos/on2}}
-  \subfigure[Algoritmos con eficiencia $O(n\log n)$]{\includegraphics[width=70mm]{graficos/onlogn}}
-  \subfigure[Algoritmos con eficiencia $O(n^3)$]{\includegraphics[width=70mm]{graficos/on3}}
-  \subfigure[Algoritmos con eficiencia $O(2^n)$]{\includegraphics[width=70mm]{graficos/o2n}}
-  \subfigure[Algoritmos de ordenación]{\includegraphics[width=90mm]{graficos/sort}}
+  \subfigure[Algoritmos con eficiencia
+$O(n^2)$]{\label{graf:n2}\includegraphics[width=70mm]{graficos/on2}}
+\subfigure[Algoritmos con eficiencia $O(n\log
+n)$]{\label{graf:nlogn}\includegraphics[width=70mm]{graficos/onlogn}}
+\subfigure[Algoritmos con eficiencia
+$O(n^3)$]{\label{graf:n3}\includegraphics[width=70mm]{graficos/on3}}
+\subfigure[Algoritmos con eficiencia
+$O(2^n)$]{\label{graf:2n}\includegraphics[width=70mm]{graficos/o2n}}
+\subfigure[Algoritmos de
+ordenación]{\label{graf:sort}\includegraphics[width=90mm]{graficos/sort}}
 \end{figure}
 
+\newpage
+
 \section{Eficiencia Híbrida}
+\setcounter{subfigure}{0}
 
 \subsection{Algoritmos con eficiencia $O(n^2)$}
 
 \begin{flushleft}
-  Usando la orden fit, he ajustado los resultados de estos algoritmos
-  con una función de la forma \[\hspace{-30mm}f(x)=a_0x^2+a_1x+a_2\] A
-  continuación expongo los distintos coeficientes que he obtenido en
-  el ajuste de los tiempos de cada algoritmo, junto con una
-  represención de la función y los resultados.
+  Usando la orden \texttt{fit} de \texttt{gnuplot}, he ajustado los
+  resultados de estos algoritmos con una función de la
+  forma \[\hspace{-30mm}f(x)=a_0x^2+a_1x+a_2\] A continuación expongo
+  los distintos coeficientes que he obtenido en el ajuste de los
+  tiempos de cada algoritmo, junto con una represención de la función
+  y los resultados.
 \end{flushleft}
 
 \subsubsection{Burbuja}
@@ -221,10 +273,12 @@ a1              = -6.33841e-06     +/- 1.07e-06     (16.88%)
 a2              = 0.014873         +/- 0.006036     (40.59%)
 \end{verbatim}
 
-\begin{figure}[H]
-  \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/burbuja_ajust}}
+\begin{figure}[H] \centering
+\subfigure[\label{graf:ajust-burbuja}Ajuste del algoritmo de
+burbuja]{\includegraphics[width=70mm]{graficos/burbuja_ajust}}
 \end{figure}
+
+\vspace{-10mm}
 
 \subsubsection{Inserción}
 
@@ -236,9 +290,9 @@ a1              = -5.93381e-07     +/- 2.282e-07    (38.45%)
 a2              = 0.0039437        +/- 0.001287     (32.64%)
 \end{verbatim}
 
-\begin{figure}[H]
-  \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/insercion_ajust}}
+\begin{figure}[H] \centering
+\subfigure[\label{graf:ajust-insercion}Ajuste del algoritmo de
+inserción]{\includegraphics[width=70mm]{graficos/insercion_ajust}}
 \end{figure}
 
 \subsubsection{Selección}
@@ -250,19 +304,22 @@ a1              = 1.72508e-07      +/- 4.185e-08    (24.26%)
 a2              = -0.000123672     +/- 0.0002361    (190.9%)
 \end{verbatim}
 
-\begin{figure}[H]
-  \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/seleccion_ajust}}
+\begin{figure}[H] \centering
+\subfigure[\label{graf:ajust-seleccion}Ajuste del algoritmo de
+selección]{\includegraphics[width=70mm]{graficos/seleccion_ajust}}
 \end{figure}
+
+\vspace{-10mm}
 
 \subsection{Algoritmos con eficiencia $O(n\log n)$}
 
 \begin{flushleft}
-  Usando la orden fit, he ajustado los resultados de estos algoritmos
-  con una función de la forma \[\hspace{-30mm}f(x)=an\log(bx+c)+d\] A
-  continuación expongo los distintos coeficientes que he obtenido en
-  el ajuste de los tiempos de cada algoritmo, junto con una
-  represención de la función y los resultados.
+  Usando la orden \texttt{fit} de \texttt{gnuplot}, he ajustado los
+  resultados de estos algoritmos con una función de la
+  forma \[\hspace{-30mm}f(x)=ax\log(bx+c)+d\] A continuación expongo
+  los distintos coeficientes que he obtenido en el ajuste de los
+  tiempos de cada algoritmo, junto con una represención de la función
+  y los resultados.
 \end{flushleft}
 
 \subsubsection{Mergesort}
@@ -276,9 +333,9 @@ c               = 7.18312e-07      +/- 9.373e+04    (1.305e+13%)
 d               = 0.000312996      +/- 13.27        (4.239e+06%)
 \end{verbatim}
 
-\begin{figure}[H]
-  \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/mergesort_ajust}}
+\begin{figure}[H] \centering
+\subfigure[\label{graf:ajust-mergesort}Ajuste del algoritmo
+mergesort]{\includegraphics[width=70mm]{graficos/mergesort_ajust}}
 \end{figure}
 
 \subsubsection{Quicksort}
@@ -294,8 +351,11 @@ d               = 0.000390981      +/- 0.004212     (1077%)
 
 \begin{figure}[H]
   \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/quicksort_ajust}}
+  \subfigure[\label{graf:ajust-quicksort}Ajuste del algoritmo
+quicksort]{\includegraphics[width=70mm]{graficos/quicksort_ajust}}
 \end{figure}
+
+\vspace{-10mm}
 
 \subsubsection{Heapsort}
 
@@ -308,15 +368,15 @@ c               = 2.74491e-06      +/- 7.44e+05     (2.711e+13%)
 d               = 0.000535336      +/- 0.2463       (4.6e+04%)
 \end{verbatim}
 
-\begin{figure}[H]
-  \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/heapsort_ajust}}
+\begin{figure}[H] \centering
+\subfigure[\label{graf:ajust-heapsort}Ajuste del algoritmo
+heapsort]{\includegraphics[width=70mm]{graficos/heapsort_ajust}}
 \end{figure}
 
 \subsection{Algoritmos con eficiencia $O(n^3)$: Floyd}
 
-Usando la orden fit, he ajustado los resultados de estos algoritmos
-con una función de la
+Usando la orden \texttt{fit} de \texttt{gnuplot}, he ajustado los
+resultados de estos algoritmos con una función de la
 forma \[\hspace{-30mm}f(x)=a_0x^3+a_1x^2+a_2x+a_3\] A continuación
 expongo los distintos coeficientes que he obtenido en el ajuste de los
 tiempos de cada algoritmo, junto con una represención de la función y
@@ -332,18 +392,18 @@ a3              = 0.111407         +/- 0.1808       (162.3%)
 \end{verbatim}
 
 \begin{figure}[H]
-  \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/floyd_ajust}}
+  \centering \subfigure[\label{graf:ajust-floyd}Ajuste del algoritmo
+  de Floyd]{\includegraphics[width=70mm]{graficos/floyd_ajust}}
 \end{figure}
 
 \subsection{Algoritmos con eficiencia $O(2^n)$: Hanoi}
 
-Usando la orden fit, he ajustado los resultados de estos algoritmos
-con una función de la
-forma \[\hspace{-30mm}f(x)=a2^x+b\] A continuación
-expongo los distintos coeficientes que he obtenido en el ajuste de los
-tiempos de cada algoritmo, junto con una represención de la función y
-los resultados.
+Usando la orden \texttt{fit} de \texttt{gnuplot}, he ajustado los
+resultados de estos algoritmos con una función de la
+forma \[\hspace{-30mm}f(x)=a2^x+b\] A continuación expongo los
+distintos coeficientes que he obtenido en el ajuste de los tiempos de
+cada algoritmo, junto con una represención de la función y los
+resultados.
 
 \begin{verbatim}
 Final set of parameters            Asymptotic Standard Error
@@ -352,9 +412,133 @@ a               = 5.33528e-09      +/- 2.615e-11    (0.49%)
 b               = 1                +/- 0.2034       (20.34%)
 \end{verbatim}
 
-\begin{figure}[H]
-  \centering
-  \subfigure{\includegraphics[width=70mm]{graficos/hanoi_ajust}}
+\begin{figure}[H] \centering \subfigure[\label{graf:ajust-hanoi}Ajuste
+del algoritmo de
+Hanoi]{\includegraphics[width=70mm]{graficos/hanoi_ajust}}
 \end{figure}
+
+\subsection{Otros ajustes}
+
+\begin{flushleft}
+  Tomemos unos ejemplos para ajustar los tiempos de ejecución de un
+  algoritmo por una función que no se corresponde con su eficiencia
+  teórica.
+\end{flushleft}
+
+\subsubsection{Mergesort}
+
+\begin{flushleft} 
+  Ajustaremos los tiempos del algoritmo mergesort por tres funciones
+  distintas: su eficiencia teórica, un orden inferior y un orden
+  superior.
+\[f(x)=a_0x\log(a_1x+a_2)+a_3\]
+\[g(x)=b_0x+b_1\]
+\[h(x)=c_0x^2+c_1x+c_2\]
+
+Según la eficiencia teórica, deberíamos tener un mejor ajuste para $f$
+que para $g$ y $h$.
+\end{flushleft}
+
+\begin{flushleft}
+  Usando \texttt{fit}, he obtenido los siguientes valores para los
+  coeficientes de cada función.
+\end{flushleft}
+
+\title{Para $f$:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a0              = 6.33118e-06      +/- 0.0005677    (8967%)
+a1              = 5.89658e-07      +/- 5.426e-05    (9203%)
+a2              = 1.01512          +/- 1.361        (134.1%)
+a3              = 0.00010443       +/- 0.0001293    (123.8%)
+\end{verbatim}
+\title{Para $g$:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b0              = 1.90043e-07      +/- 6.099e-09    (3.209%)
+b1              = -0.000322459     +/- 9.067e-05    (28.12%)
+\end{verbatim}
+
+\newpage
+\title{Para $h$:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+c0              = 3.64724e-12      +/- 5.786e-13    (15.86%)
+c1              = 9.52149e-08      +/- 1.55e-08     (16.28%)
+c2              = 0.000104267      +/- 8.744e-05    (83.86%)
+\end{verbatim}
+
+\begin{flushleft}
+  En el siguiente gráfico se puede apreciar como $g$ es un mal ajuste
+  para los tiempos de este algoritmo, en cambio no se aprecia apenas
+diferencia entre $f$ y $h$.
+\end{flushleft}
+
+\begin{figure}[H] \centering
+\subfigure[\label{graf:otros-mergesort}Diferentes ajustes para el
+algoritmo mergesort]{\includegraphics[width=70mm]{graficos/mergesort_otros_ajust}}
+\end{figure}
+
+\subsubsection{Hanoi}
+
+\begin{flushleft} 
+  Ajustaremos los tiempos del algoritmo de Hanoi por tres funciones
+  distintas: su eficiencia teórica, un orden inferior y un orden
+  superior.
+\[f(x)=a_02^x+a_1\]
+\[g(x)=b_0x^{b_1}+b_2\]
+\[h(x)=c_03^x+c_1\]
+
+Según la eficiencia teórica, deberíamos tener un mejor ajuste para $f$
+que para $g$ y $h$.
+\end{flushleft}
+
+\begin{flushleft}
+  Usando \texttt{fit}, he obtenido los siguientes valores para los
+  coeficientes de cada función.
+\end{flushleft}
+
+\title{Para $f$:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a0              = 5.33528e-09      +/- 2.615e-11    (0.49%)
+a1              = 1                +/- 0.2034       (20.34%)
+\end{verbatim}
+
+\title{Para $g$:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+b0              = 3.73043e-30      +/- 7.401e-30    (198.4%)
+b1              = 20.5177          +/- 0.5393       (2.629%)
+b2              = -1.27419         +/- 0.5837       (45.81%)
+\end{verbatim}
+
+\title{Para $h$:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+c0              = 3.856e-15        +/- 1.617e-16    (4.193%)
+c1              = 3.09838          +/- 1.683        (54.3%)
+\end{verbatim}
+
+\begin{flushleft}
+  En el siguiente gráfico se puede apreciar como $h$ es un mal ajuste
+  para los tiempos de este algoritmo, para ajustar $g$, ha tomado un
+  exponente muy alto, aunque aun así tiene un ligero error. En cambio
+  $f$ ajusta la gráfica con bastante precisión.
+\end{flushleft}
+
+\begin{figure}[H] \centering
+  \subfigure[\label{graf:otros-hanoi}Diferentes ajustes para el
+  algoritmo de
+  Hanoi]{\includegraphics[width=70mm]{graficos/hanoi_otros_ajust}}
+\end{figure}
+
+\section{Variación de la eficiencia empírica con parámetros externos}
 
 \end{document}
