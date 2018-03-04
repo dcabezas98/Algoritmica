@@ -3,10 +3,10 @@
 PROGRAMA=$1
 
 echo "" > $PROGRAMA.dat
-i=10
+i=1000
 
-while [ $i -le 35 ]
+while [ $i -le 25000 ]
 do
     ./$PROGRAMA $i >> $PROGRAMA.dat
-    i=$[$i+1]
+    i=$[$i+1000]
 done

@@ -176,7 +176,7 @@
 
       \qquad
 
-      \subfigure[\vspace{1mm}Algoritmos con eficiencia $O(2^n)$]{
+      \subfigure[\vspace{1mm} Algoritmos con eficiencia $O(2^n)$]{
         \label{tab:nlogn}
         \begin{tabular}{| c c |}
           \hline
@@ -278,7 +278,7 @@ a2              = 0.014873         +/- 0.006036     (40.59%)
 burbuja]{\includegraphics[width=70mm]{graficos/burbuja_ajust}}
 \end{figure}
 
-\vspace{-10mm}
+\vspace{-12mm}
 
 \subsubsection{Inserción}
 
@@ -373,6 +373,7 @@ d               = 0.000535336      +/- 0.2463       (4.6e+04%)
 heapsort]{\includegraphics[width=70mm]{graficos/heapsort_ajust}}
 \end{figure}
 
+\newpage
 \subsection{Algoritmos con eficiencia $O(n^3)$: Floyd}
 
 Usando la orden \texttt{fit} de \texttt{gnuplot}, he ajustado los
@@ -396,6 +397,7 @@ a3              = 0.111407         +/- 0.1808       (162.3%)
   de Floyd]{\includegraphics[width=70mm]{graficos/floyd_ajust}}
 \end{figure}
 
+\vspace{-12mm}
 \subsection{Algoritmos con eficiencia $O(2^n)$: Hanoi}
 
 Usando la orden \texttt{fit} de \texttt{gnuplot}, he ajustado los
@@ -411,6 +413,8 @@ Final set of parameters            Asymptotic Standard Error
 a               = 5.33528e-09      +/- 2.615e-11    (0.49%)
 b               = 1                +/- 0.2034       (20.34%)
 \end{verbatim}
+
+\vspace{-2mm}
 
 \begin{figure}[H] \centering \subfigure[\label{graf:ajust-hanoi}Ajuste
 del algoritmo de
@@ -446,6 +450,8 @@ que para $g$ y $h$.
 
 \title{Para $f$:}
 \begin{verbatim}
+final sum of squares of residuals : 3.97491e-07
+
 Final set of parameters            Asymptotic Standard Error
 =======================            ==========================
 a0              = 6.33118e-06      +/- 0.0005677    (8967%)
@@ -455,21 +461,26 @@ a3              = 0.00010443       +/- 0.0001293    (123.8%)
 \end{verbatim}
 \title{Para $g$:}
 \begin{verbatim}
+final sum of squares of residuals : 1.11231e-06
+
 Final set of parameters            Asymptotic Standard Error
 =======================            ==========================
 b0              = 1.90043e-07      +/- 6.099e-09    (3.209%)
 b1              = -0.000322459     +/- 9.067e-05    (28.12%)
 \end{verbatim}
 
-\newpage
 \title{Para $h$:}
 \begin{verbatim}
+final sum of squares of residuals : 3.96375e-07
+
 Final set of parameters            Asymptotic Standard Error
 =======================            ==========================
 c0              = 3.64724e-12      +/- 5.786e-13    (15.86%)
 c1              = 9.52149e-08      +/- 1.55e-08     (16.28%)
 c2              = 0.000104267      +/- 8.744e-05    (83.86%)
 \end{verbatim}
+
+\newpage
 
 \begin{flushleft}
   En el siguiente gráfico se puede apreciar como $g$ es un mal ajuste
@@ -503,6 +514,8 @@ que para $g$ y $h$.
 
 \title{Para $f$:}
 \begin{verbatim}
+final sum of squares of residuals : 22.8446
+
 Final set of parameters            Asymptotic Standard Error
 =======================            ==========================
 a0              = 5.33528e-09      +/- 2.615e-11    (0.49%)
@@ -511,6 +524,8 @@ a1              = 1                +/- 0.2034       (20.34%)
 
 \title{Para $g$:}
 \begin{verbatim}
+final sum of squares of residuals : 154.285
+
 Final set of parameters            Asymptotic Standard Error
 =======================            ==========================
 b0              = 3.73043e-30      +/- 7.401e-30    (198.4%)
@@ -520,17 +535,20 @@ b2              = -1.27419         +/- 0.5837       (45.81%)
 
 \title{Para $h$:}
 \begin{verbatim}
+final sum of squares of residuals : 1736.22
+
 Final set of parameters            Asymptotic Standard Error
 =======================            ==========================
-c0              = 3.856e-15        +/- 1.617e-16    (4.193%)
-c1              = 3.09838          +/- 1.683        (54.3%)
+c0              = 3.91192e-15      +/- 1.668e-16    (4.264%)
+c1              = 1                +/- 1.736        (173.6%)
 \end{verbatim}
 
 \begin{flushleft}
   En el siguiente gráfico se puede apreciar como $h$ es un mal ajuste
   para los tiempos de este algoritmo, para ajustar $g$, ha tomado un
   exponente muy alto, aunque aun así tiene un ligero error. En cambio
-  $f$ ajusta la gráfica con bastante precisión.
+  $f$ ajusta la gráfica con bastante precisión. Esto se corresponde
+  con la suma de los cuadrados de los residuos.
 \end{flushleft}
 
 \begin{figure}[H] \centering
@@ -540,5 +558,22 @@ c1              = 3.09838          +/- 1.683        (54.3%)
 \end{figure}
 
 \section{Variación de la eficiencia empírica con parámetros externos}
+\setcounter{subfigure}{0}
+
+\begin{flushleft}
+  He compilado algunos de los algoritmos con nivel de optimización
+  \texttt{O2}, en los siguientes gráficos puede apreciarse como reduce
+  el tiempo de ejecución, pero sin afectar al orden de eficiencia.
+\end{flushleft}
+
+\begin{figure}[H] \centering
+  \subfigure[\label{graf:burbuja-op}Burbuja]{\includegraphics[width=70mm]{graficos/burbuja_op}}
+  \subfigure[\label{graf:quicksort-op}Quicksort]{\includegraphics[width=70mm]{graficos/quicksort_op}}
+\end{figure}
+\vspace{-10mm}
+\begin{figure}[H] \centering
+  \subfigure[\label{graf:floyd-op}Floyd]{\includegraphics[width=70mm]{graficos/burbuja_op}}
+  \subfigure[\label{graf:burbuja-op}Hanoi]{\includegraphics[width=70mm]{graficos/burbuja_op}}
+\end{figure}
 
 \end{document}
