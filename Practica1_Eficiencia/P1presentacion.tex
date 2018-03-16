@@ -12,6 +12,13 @@
 
 \beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
 
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Contenido}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
 \begin{document}
 
 \title{Práctica 1: Análisis de la eficiencia de algoritmos}  
@@ -22,7 +29,7 @@
 \titlepage
 \end{frame}
 
-\begin{frame}\frametitle{Contenido}
+\begin{frame}{Contenido}
 \tableofcontents
 \end{frame} 
 
@@ -30,7 +37,7 @@
 
 \subsection{Algoritmos de orden de eficiencia $O(n^2)$}
 
-\begin{frame}\frametitle{Algoritmos de orden de eficiencia $O(n^2)$} 
+\begin{frame}{Algoritmos de orden de eficiencia $O(n^2)$} 
 
 \begin{figure}[H]
   \centering
@@ -40,7 +47,7 @@
 \end{frame}
 
 \subsection{Algoritmos de orden de eficiencia $O(n\log n)$}
-\begin{frame}\frametitle{Algoritmos de orden de eficiencia $O(n\log n)$}
+\begin{frame}{Algoritmos de orden de eficiencia $O(n\log n)$}
 
   \begin{figure}[H]
     \centering
@@ -50,7 +57,7 @@
   \end{frame}
 
 \subsection{Algoritmos de orden de eficiencia $O(n^3)$}
-\begin{frame}\frametitle{Algoritmos de orden de eficiencia $O(n^3)$}
+\begin{frame}{Algoritmos de orden de eficiencia $O(n^3)$}
 
   \begin{figure}[H]
     \centering
@@ -60,7 +67,7 @@
   \end{frame}
 
 \subsection{Algoritmos de orden de eficiencia $O(2^n)$}
-\begin{frame}\frametitle{Algoritmos de orden de eficiencia $O(2^n)$}
+\begin{frame}{Algoritmos de orden de eficiencia $O(2^n)$}
 
   \begin{figure}[H]
     \centering
@@ -70,7 +77,7 @@
   \end{frame}
 
 \subsection{Algoritmos de ordenación}
-\begin{frame}\frametitle{Algoritmos de ordenación}
+\begin{frame}{Algoritmos de ordenación}
 
   \begin{figure}[H]
     \centering
@@ -83,7 +90,7 @@
 
 \subsection{Algoritmos con orden de eficiencia $O(n^2)$}
 
-\begin{frame}[fragile]\frametitle{Algoritmos con orden de eficiencia $O(n^2)$} 
+\begin{frame}[fragile]{Algoritmos con orden de eficiencia $O(n^2)$} 
 
 \begin{equation*}
     f(x)=a_0x^2+a_1x+a_2
@@ -105,7 +112,7 @@ a2              = 0.014873         +/- 0.006036     (40.59%)
 
 \end{frame}
 
-\begin{frame}\frametitle{Burbuja}
+\begin{frame}{Burbuja}
 
   \begin{figure}[H] \centering
 \subfigure{\includegraphics[width=95mm]{graficos/burbuja_ajust}}
@@ -113,7 +120,7 @@ a2              = 0.014873         +/- 0.006036     (40.59%)
 
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Inserción}
+\begin{frame}[fragile]{Inserción}
   
 \begin{verbatim}
 Final set of parameters            Asymptotic Standard Error
@@ -129,7 +136,7 @@ a2              = 0.0039437        +/- 0.001287     (32.64%)
 
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Selección}
+\begin{frame}[fragile]{Selección}
   
 \begin{verbatim}
 Final set of parameters            Asymptotic Standard Error
@@ -147,7 +154,7 @@ a2              = -0.000123672     +/- 0.0002361    (190.9%)
 
 \subsection{Algoritmos con orden de eficiencia $O(n\log n)$}
 
-\begin{frame}[fragile]\frametitle{Algoritmos con orden de eficiencia $O(n\log n)$} 
+\begin{frame}[fragile]{Algoritmos con orden de eficiencia $O(n\log n)$} 
 
 \begin{equation*}
     f(x)=ax\log(bx+c)+d
@@ -170,7 +177,7 @@ d               = 0.000312996      +/- 13.27        (4.239e+06%)
 
 \end{frame}
 
-\begin{frame}\frametitle{Mergesort}
+\begin{frame}{Mergesort}
 
 \begin{figure}[H] \centering
 \subfigure{\includegraphics[width=95mm]{graficos/mergesort_ajust}}
@@ -178,7 +185,7 @@ d               = 0.000312996      +/- 13.27        (4.239e+06%)
 
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Quicksort}
+\begin{frame}[fragile]{Quicksort}
 \vspace{-2mm}
 \begin{verbatim}
 Final set of parameters            Asymptotic Standard Error
@@ -195,7 +202,7 @@ d               = 0.000390981      +/- 0.004212     (1077%)
 
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Heapsort}
+\begin{frame}[fragile]{Heapsort}
 \vspace{-2mm}
 \begin{verbatim}
 Final set of parameters            Asymptotic Standard Error
@@ -214,7 +221,7 @@ d               = 0.000535336      +/- 0.2463       (4.6e+04%)
 
 \subsection{Algoritmos con orden de eficiencia $O(n^3)$: Algoritmo de Floyd}
 
-\begin{frame}[fragile]\frametitle{Algoritmos con orden de eficiencia $O(n^3)$: Algoritmo de Floyd} 
+\begin{frame}[fragile]{Algoritmos con orden de eficiencia $O(n^3)$: Algoritmo de Floyd} 
 
 \begin{equation*}
     f(x)=a_0x^3+a_1x^2+a_2x+a_3
@@ -247,7 +254,7 @@ a3              = 0.111407         +/- 0.1808       (162.3%)
 
 \subsection{Algoritmos con orden de eficiencia $O(2^n)$: Algoritmo de Hanoi}
 
-\begin{frame}[fragile]\frametitle{Algoritmos con orden de eficiencia $O(2^n)$: Algoritmo de Hanoi} 
+\begin{frame}[fragile]{Algoritmos con orden de eficiencia $O(2^n)$: Algoritmo de Hanoi} 
 
 \begin{equation*}
     f(x)=a2^x+b
@@ -279,7 +286,7 @@ b               = 1                +/- 0.2034       (20.34%)
 \subsection{Otros ajustes}
 \subsubsection{Mergesort}
 
-\begin{frame}[fragile]\frametitle{Mergesort}
+\begin{frame}[fragile]{Mergesort}
 
   \begin{equation*}
     f(x)=a_0x\log(a_1x+a_2)+a_3
@@ -307,7 +314,7 @@ a3              = 0.00010443       +/- 0.0001293    (123.8%)
   
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Mergesort}
+\begin{frame}[fragile]{Mergesort}
   \begin{flushleft}
     Coeficientes obtenidos para $g$:
   \end{flushleft}
@@ -335,7 +342,7 @@ c2              = 0.000104267      +/- 8.744e-05    (83.86%)
 
 \end{frame}
 
-\begin{frame}\frametitle{Mergesort}
+\begin{frame}{Mergesort}
   \begin{figure}[H] \centering
 \subfigure{\includegraphics[width=95mm]{graficos/mergesort_otros_ajust}}
 \end{figure}
@@ -343,7 +350,7 @@ c2              = 0.000104267      +/- 8.744e-05    (83.86%)
 
 \subsubsection{Hanoi}
 
-\begin{frame}[fragile]\frametitle{Hanoi}
+\begin{frame}[fragile]{Hanoi}
 
   \begin{equation*}
     f(x)=a_02^x+a_1
@@ -369,7 +376,7 @@ a1              = 1                +/- 0.2034       (20.34%)
   
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Hanoi}
+\begin{frame}[fragile]{Hanoi}
   \begin{flushleft}
     Coeficientes obtenidos para $g$:
   \end{flushleft}
@@ -397,7 +404,7 @@ c1              = 1                +/- 1.736        (173.6%)
 
 \end{frame}
 
-\begin{frame}\frametitle{Hanoi}
+\begin{frame}{Hanoi}
   \begin{figure}[H] \centering
 \subfigure{\includegraphics[width=95mm]{graficos/hanoi_otros_ajust}}
 \end{figure}
@@ -405,25 +412,25 @@ c1              = 1                +/- 1.736        (173.6%)
 
 \section{Variación de la eficiencia empírica con parámetros externos: Nivel de optimización}
 
-\begin{frame}\frametitle{Burbuja}
+\begin{frame}{Burbuja}
   \begin{figure}[H] \centering
   \subfigure{\includegraphics[width=95mm]{graficos/burbuja_op}}
 \end{figure}
 \end{frame}
 
-\begin{frame}\frametitle{Quicksort}
+\begin{frame}{Quicksort}
   \begin{figure}[H] \centering
   \subfigure{\includegraphics[width=95mm]{graficos/quicksort_op}}
 \end{figure}
 \end{frame}
 
-\begin{frame}\frametitle{Floyd}
+\begin{frame}{Floyd}
   \begin{figure}[H] \centering
   \subfigure{\includegraphics[width=95mm]{graficos/floyd_op}}
 \end{figure}
 \end{frame}
 
-\begin{frame}\frametitle{Hanoi}
+\begin{frame}{Hanoi}
   \begin{figure}[H] \centering
   \subfigure{\includegraphics[width=95mm]{graficos/hanoi_op}}
 \end{figure}
