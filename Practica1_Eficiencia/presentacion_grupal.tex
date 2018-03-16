@@ -14,6 +14,13 @@
 
 \usepackage{amsmath}
 
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Índice}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
 \begin{document}
 
 \title{Práctica 1: Análisis de Eficiencia de Algoritmos}  
@@ -25,14 +32,14 @@ Emilio José Hoyo Medina \\ David Cabezas Berrido}
 \titlepage
 \end{frame}
 
-\begin{frame}\frametitle{Índice}\tableofcontents
+\begin{frame}{Índice}\tableofcontents
 \end{frame} 
 
 \section{Eficiencia Teórica}
 
 \subsection{Algoritmos de orden de eficiencia $O(n^2)$}
 
-\begin{frame}[fragile]\frametitle{Selección}
+\begin{frame}[fragile]{Selección}
 \begin{verbatim}
     1  static void seleccion_lims(int T[], int inicial, int final)
     2  {
@@ -54,7 +61,7 @@ Emilio José Hoyo Medina \\ David Cabezas Berrido}
 \end{verbatim}
 \end{frame}
 
-\begin{frame}\frametitle{Selección}
+\begin{frame}{Selección}
 \begin{equation*}
   \sum\limits_{i=0}^{n-2}\left(\left(\sum\limits_{j=i}^{n-1}a\right)+b\right) = \sum\limits_{i=0}^{n-2}\sum\limits_{j=i}^{n-1}a + \sum\limits_{i=0}^{n-2}b
 \end{equation*}
@@ -74,7 +81,7 @@ Emilio José Hoyo Medina \\ David Cabezas Berrido}
 \end{align*}
 \end{frame}
 
-\begin{frame}\frametitle{Selección}
+\begin{frame}{Selección}
 \text{Segundo sumando (lineal)}
 \begin{equation*}    
 \sum\limits_{i=0}^{n-2}b=b\sum\limits_{i=0}^{n-2}1=b(n-1) \in O(n)
@@ -88,7 +95,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 
 \subsection{Algoritmos de orden de eficiencia $O(n\log n)$}
 
-\begin{frame}[fragile]\frametitle{Heapsort: reajustar}
+\begin{frame}[fragile]{Heapsort: reajustar}
 \begin{verbatim}
     1  static void reajustar(int T[], int num_elem, int k)
     2  {
@@ -111,7 +118,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{verbatim}
 \end{frame}
 
-\begin{frame}\frametitle{Heapsort: reajustar}
+\begin{frame}{Heapsort: reajustar}
 \begin{flushleft}
   Peor caso: $k = 0$
   
@@ -131,7 +138,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{flushleft}
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{Heapsort}
+\begin{frame}[fragile]{Heapsort}
 \begin{verbatim}
     1  static void heapsort(int T[], int num_elem)
     2  {
@@ -149,7 +156,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{verbatim}
 \end{frame}
  
-\begin{frame}\frametitle{Heapsort}
+\begin{frame}{Heapsort}
 \begin{flushleft}
   El primer bucle se ejecuta $\frac{n}{2}+1$ veces.
 
@@ -182,7 +189,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsection{Algoritmos de orden de eficiencia $O(n^3)$: Floyd}
-\begin{frame}[fragile]\frametitle{Floyd}
+\begin{frame}[fragile]{Floyd}
   \begin{verbatim}
     1  void Floyd(int **M, int dim)
     2  {
@@ -197,7 +204,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
   \end{verbatim}
 \end{frame}
 
-\begin{frame}\frametitle{Floyd}
+\begin{frame}{Floyd}
 
   $a$ = Constante que acota el cuerpo del tercer bucle (líneas 7 y 8)
 
@@ -206,7 +213,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsection{Algoritmos de orden de eficiencia $O(2^n)$: Hanoi}
-\begin{frame}[fragile]\frametitle{Hanoi}
+\begin{frame}[fragile]{Hanoi}
 \begin{verbatim}
     1  void hanoi (int M, int i, int j)
     2  {
@@ -220,7 +227,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{verbatim}
 \end{frame}
 
-\begin{frame}\frametitle{Hanoi}
+\begin{frame}{Hanoi}
 
   Ecuación en recurrencia:
   \[T(M) = T(M-1) + a + T(M-1) = 2T(M-1)+a\]
@@ -239,7 +246,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \subsection{Ordenación $O(n^2)$}
 
 \subsubsection{Burbuja}
-\begin{frame}\frametitle{Burbuja}
+\begin{frame}{Burbuja}
 \begin{figure}[H]
 \centering
 \subfigure[Burbuja]{\includegraphics[width=90mm]{grupo/burbuja}}
@@ -247,7 +254,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsubsection{Inserción}
-\begin{frame}\frametitle{Inserción}
+\begin{frame}{Inserción}
 \begin{figure}[H]
 \centering
 \subfigure[Inserción]{\includegraphics[width=90mm]{grupo/insercion}}
@@ -255,7 +262,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsubsection{Selección}
-\begin{frame}\frametitle{Selección}
+\begin{frame}{Selección}
 \begin{figure}[H]
 \centering
 \subfigure[Selección]{\includegraphics[width=90mm]{grupo/seleccion}}
@@ -265,7 +272,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \subsection{Ordenación $O(n\log n)$}
   
 \subsubsection{Quicksort}
-\begin{frame}\frametitle{Quicksort}
+\begin{frame}{Quicksort}
 \begin{figure}[H]
 \centering
 \subfigure[Quicksort]{\includegraphics[width=90mm]{grupo/quicksort}}
@@ -273,7 +280,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsubsection{Mergesort}
-\begin{frame}\frametitle{Mergesort}
+\begin{frame}{Mergesort}
 \begin{figure}[H]
 \centering
 \subfigure[Mergesort]{\includegraphics[width=90mm]{grupo/mergesort}}
@@ -281,7 +288,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsubsection{Heapsort}
-\begin{frame}\frametitle{Heapsort}
+\begin{frame}{Heapsort}
 \begin{figure}[H]
 \centering
 \subfigure[Heapsort]{\includegraphics[width=90mm]{grupo/heapsort}}
@@ -289,7 +296,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsection{$O(n^3)$: Floyd}
-\begin{frame}\frametitle{Floyd}
+\begin{frame}{Floyd}
 \begin{figure}[H]
 \centering
 \subfigure[Floyd]{\includegraphics[width=90mm]{grupo/floyd}}
@@ -297,7 +304,7 @@ Eficiencia resultante: $\text{max}\{O(n^2), O(n)\} = O(n^2)$
 \end{frame}
 
 \subsection{$O(2^n)$: Hanoi}
-\begin{frame}\frametitle{Hanoi}
+\begin{frame}{Hanoi}
 \begin{figure}[H]
 \centering
 \subfigure[Hanoi]{\includegraphics[width=95mm]{grupo/hanoi}}
