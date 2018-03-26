@@ -49,7 +49,7 @@ for (int j=m-1; j>0; j--) {
 }
 //me quedo con los n primeros del vector
 for (int j=0; j<n; j++) T[j]=aux[j];
-for (int j=0; j<n; j++) cout << T[j] << " ";
+//for (int j=0; j<n; j++) cout << T[j] << " ";
 
 //Y ahora ordeno el vector T
 vector<int> myvector (T, T+n);
@@ -64,5 +64,6 @@ sort(myvector.begin(),myvector.end());
 
 
 delete [] aux;
+ delete T;
 
 }
