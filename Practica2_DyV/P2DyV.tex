@@ -81,7 +81,7 @@ es lineal. Se visualizará su eficiencia empírica en cada caso.
 En este caso, he ideado un algoritmo similar al de búsqueda binaria.
 
 \begin{lstlisting}
-  int enSuPosicion(int *T, int n){
+int enSuPosicion(int *T, int n){
   
   int result = -1;
   int left=0, right=n-1;
@@ -140,9 +140,9 @@ confirman la eficiencia teórica de cada uno de ellos.
   \caption{Ajuste de ambos algoritmos en el caso de elementos distintos.}
   \label{fig:ajust-distintos}
   \subfigure[Ajuste del algoritmo
-  ``Obvio'']{\includegraphics[width=70mm]{graficos/ajusteObvio}}
+  ``Obvio'']{\includegraphics[width=75mm]{graficos/ajusteObvio}}
   \subfigure[Ajuste del algoritmo
-  DyV]{\includegraphics[width=70mm]{graficos/ajusteDyV}}
+  DyV]{\includegraphics[width=75mm]{graficos/ajusteDyV}}
 \end{figure}
 
 Para ajustar los tiempos del algoritmo ``obvio'', he usado la función
@@ -150,7 +150,7 @@ Para ajustar los tiempos del algoritmo ``obvio'', he usado la función
 algoritmo Divide y Vencerás, la función
 $g(x)=3.66877\mbox{e}-09\log(0.975496x+1)+5.19407\mbox{e}-08$.
 
-\section{Se repiten elementos}
+\section{Segundo caso: Se repiten elementos}
 El razonamiento anterior no es válido cuando el vector tenga elementos
 repetidos, de hecho no es difícil encontrar ejemplos en los que el
 algoritmo falle. Por ejemplo si consultamos la posición 30 y
@@ -184,8 +184,7 @@ int enSuPosicionLims(int *T, int l, int r){
   if(p < T[p]){
     if((res = enSuPosicionLims(T, l, p)) != -1)
       return res;
-
-        
+   
     return enSuPosicionLims(T, T[p], r);
   }
     
@@ -259,9 +258,9 @@ que no.
     vector.}
   \label{fig:ajust-obvio-inverso}
   \subfigure[Todos los elementos son
-  distintos]{\includegraphics[width=70mm]{graficos/ajuste_obvio-inverso-distintos}}
+  distintos]{\includegraphics[width=75mm]{graficos/ajuste_obvio-inverso-distintos}}
   \subfigure[Hay elementos
-  repetidos]{\includegraphics[width=70mm]{graficos/ajuste_obvio-inverso-repetidos}}
+  repetidos]{\includegraphics[width=75mm]{graficos/ajuste_obvio-inverso-repetidos}}
 \end{figure}
 
 La función de la izquierda es $f(x)=2.40612\mbox{e}-09x-0.000937639$,
@@ -281,14 +280,14 @@ como se observa en la figura \ref{fig:ajust-sol-obvio-inverso}
     vector.}
   \label{fig:ajust-sol-obvio-inverso}
   \subfigure[Todos los elementos son
-  distintos]{\includegraphics[width=70mm]{graficos/ajust-sol-dist}}
+  distintos]{\includegraphics[width=75mm]{graficos/ajust-sol-dist}}
   \subfigure[Hay elementos
-  repetidos]{\includegraphics[width=70mm]{graficos/ajust-sol-rep}}
+  repetidos]{\includegraphics[width=75mm]{graficos/ajust-sol-rep}}
 \end{figure}
 
 Ahora la función de la izquierda es
-$f(x)=1.31781\mbox{e}-09x-1.9522e-05$, y su ajuste tiene una RMS de
-0.00021679. Mientras que la función de la derecha es
+$f(x)=1.31781\mbox{e}-09x-1.9522\mbox{e}-05$, y su ajuste tiene una
+RMS de 0.00021679. Mientras que la función de la derecha es
 $g(x)=1.23924\mbox{e}-09-5.40427e-05$ y tiene una RMS de
 0.000239843. Por tanto, estos ajustes son aproximadamente 5 veces más
 precisos.
