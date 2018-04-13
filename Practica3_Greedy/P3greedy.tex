@@ -82,7 +82,8 @@ espera de los clientes sea óptimo.
 
 \section{Resolución teórica: Un único electricista}
 
-\subsection{Deducción}
+\subsection{Deducción del algoritmo}
+
 Las tareas se realizarán en el orden indicado por su subíndice:
 $[t_1, t_2,\ldots,t_n]$
 
@@ -107,7 +108,8 @@ menor cuando las reparaciones que requieren menos tiempo se realizan
 antes. Por ello, propongo como algoritmo realizar las tareas en orden
 de menor a mayor tiempo requerido.
 
-\subsection{Demostración}
+\subsection{Demostración de que produce la solución óptima}
+
 Probemos que este algoritmo obtiene la solución óptima, para ello
 usaremos inducción sobre el número de tareas.
 
@@ -132,7 +134,6 @@ Tomemos el primer sumando de cada sumatoria
 
 \[C_r = (n+1)r_1 + C_r^* \qquad C_r^* = \sum_{i=2}^{n+1}(n+2-i)r_i\]
 \[C_s = (n+1)s_1 + C_s^* \qquad C_s^* = \sum_{i=2}^{n+1}(n+2-i)s_i\]
-
 
 Como nuestro algoritmo prioriza siempre la reparación que menos tiempo
 requiera, podemos asegurar $r_1 \leq s_1, \ (n+1)r_1 \leq
