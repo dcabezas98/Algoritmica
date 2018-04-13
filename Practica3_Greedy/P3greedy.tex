@@ -1,0 +1,184 @@
+\documentclass[a4]{article}
+
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} 
+
+\usepackage[utf8]{inputenc}   % otra alternativa para los caracteres acentuados y la "Ã±"
+\usepackage[           spanish % para poder usar el espaÃ±ol
+                      ,es-tabla % para los captions de las tablas
+                       ]{babel}   
+\decimalpoint %para usar el punto decimal en vez de coma para los nÃºmeros con decimales
+
+\usepackage[bookmarks=true,
+            bookmarksnumbered=false, % true means bookmarks in 
+                                     % left window are numbered              
+            bookmarksopen=false,     % true means only level 1
+                                     % are displayed.
+            colorlinks=true,
+            linkcolor=blue,
+            urlcolor=cyan]{hyperref}
+            
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{parskip}
+\usepackage{xcolor}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{caption}
+
+\usepackage{listings}
+\lstset
+{ %Formatting for code in appendix
+  language=C++, % choose the language of the code
+  basicstyle=\fontfamily{pcr}\selectfont\footnotesize\color{black},
+  keywordstyle=\color{darkorange}\bfseries, % style for keywords
+  numbers=left, % where to put the line-numbers
+  numberstyle=\tiny, % the size of the fonts that are used for the line-numbers     
+  backgroundcolor=\color{white},
+  showspaces=false, % show spaces adding particular underscores
+  showstringspaces=false, % underline spaces within strings
+  showtabs=false, % show tabs within strings adding particular underscores
+  tabsize=2, % sets default tabsize to 2 spaces
+  captionpos=b, % sets the caption-position to bottom
+  breaklines=true, % sets automatic line breaking
+  breakatwhitespace=false, 
+}
+
+\usepackage{enumerate}% paquete para poder personalizar fÃ¡cilmente la apariencia de las listas enumerativas
+
+\usepackage{graphicx} % figuras
+\usepackage{subfigure} % subfiguras
+
+\definecolor{darkorange}{rgb}{0.94,0.4,0.0}
+	
+\usepackage{float} % para controlar la situaciÃ³n de los entornos flotantes
+
+\restylefloat{figure}
+\restylefloat{table} 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\author{David Cabezas Berrido}
+\date{\vspace{-5mm}}
+
+\title{\huge Práctica 3: Algoritmos Greedy \HRule\vspace{-4mm}}
+
+\setcounter{section}{-1}
+
+\begin{document}
+\maketitle
+\vspace{20mm}
+\tableofcontents
+\newpage
+
+\section{Problema de las reparaciones}
+Un electricista necesita hacer $n$ reparaciones, se sabe de antemano
+que la tarea $i$-ésima tardará $t_i$ minutos. El objetivo es minimizar
+el tiempo medio de espera de los clientes. Debemos diseñar un
+algoritmo que tome una lista de tiempos de tareas como entrada y
+devuelva la permutación de la misma en la que el tiempo medio de
+espera de los clientes sea óptimo.
+
+\section{Resolución teórica}
+
+Las tareas se realizarán en el orden indicado por su subíndice:
+$[t_1, t_2,\ldots,t_n]$
+
+Notaremos $C_i$ al tiempo de espera del cliente $i$-ésimo. Este tendrá
+que esperar a que se realicen tanto su reparación como todas las
+anteriores, el primer cliente sólo tendrá que esperar el tiempo que
+tome su reparación ($C_1=t_1$), el segundo el tiempo de la primera
+reparación y el de la suya ($C_2=t_1+t_2$). En general:
+
+\[C_i=\sum_{j=1}^it_j \qquad \forall i \in \{1,2,\ldots,n\}\]
+
+Nuestro objetivo es minimizar el tiempo medio de espera de cada
+cliente, por lo tanto la suma de los $C_i$ debe ser lo más baja
+posible. Llamemos $C$ a esta suma:
+
+\[C = \sum_{i=1}^n C_i = \sum_{i=1}^n \sum_{j=1}^i t_j =
+  \sum_{i=1}^n(n+1-i)t_i\]
+
+Como observamos, los tiempos de las tareas quedan multiplicados por
+coeficientes cada vez menores. Por tanto, el tiempo total de espera es
+menor cuando las reparaciones que requieren menos tiempo se realizan
+antes. Por ello, propongo como algoritmo realizar las tareas en orden
+de menor a mayor tiempo requerido.
+
+Probemos que este algoritmo obtiene la solución óptima, para ello
+usaremos inducción sobre el número de tareas.
+
+En el caso $n=1$, hay una única solución y por tanto óptima.
+
+Supongamos que nuestro algoritmo siempre encuentra la solución óptima
+en un problema de tamaño $n$, y consideremos un problema con una
+lista $T$ de $n+1$ elementos con los tiempos de $n+1$ reparaciones
+urgentes.  $T=[t_1,t_2,\ldots,t_n,t_{n+1}]$.
+
+Notaremos $R=[r_1,r_2,\ldots,r_n,r_{n+1}]$ a la solución que produce
+nuestro algorítmo y $S=[s_1,s_2,\ldots,s_n,s_{n+1}]$ a una solución
+óptima (existe porque el número de posibles soluciones es finito,
+$n!$). Ambas son permutaciones de $T$. Tenemos: \vspace{-4mm}
+
+\[C_r = \sum_{i=1}^{n+1} (n+2-i)r_i\]
+\[C_s = \sum_{i=1}^{n+1} (n+2-i)s_i\]
+
+Ya sabemos que $C_s \leq C_r$, ya que $S$ es la solución
+óptima. Debemos probar que se da la igualdad.
+
+Tomemos el primer sumando de cada sumatoria
+
+\[C_r = (n+1)r_1 + C_r^* \qquad C_r^* = \sum_{i=2}^{n+1}(n+2-i)r_i\]
+\[C_s = (n+1)s_1 + C_s^* \qquad C_s^* = \sum_{i=2}^{n+1}(n+2-i)s_i\]
+
+
+Como nuestro algoritmo prioriza siempre la reparación que menos tiempo
+requiera, podemos asegurar $r_1 \leq s_1, \ (n+1)r_1 \leq
+(n+1)s_1$. Luego como sabíamos que $C_s \leq C_r$, deducimos que
+$C_s^* \leq C_r^*$.
+
+Consideramos ahora los problemas $R^*=[r_2,r_3,\ldots,r_n,r_{n+1}]$ y
+$S^*=[s_2,s_3,\ldots,s_n,s_{n+1}]$, ambos de tamaño $n$. Sabemos que
+nuestro algoritmo produce para $R^*$ la solución óptima, con $C^*_r$
+como suma de los tiempos de espera ya que 
+
+\[\sum_{i=1}^n(n+1-i)r_{i+1} = \sum_{i=2}^{n+1}(n+2-i)r_i = C^*_r\]
+
+Si $r_1=s_1$, se tendría $R^*=S^*$, por lo que $C_s^*$ sería una suma
+de tiempos para alguna solución del problema $R^*$, para el que $C_r^*$
+es mínima. Pero sabíamos previamente que $C_s^* \leq C_r^*$, luego se
+dará la igualdad como queríamos.
+
+\[C_s^* = C_r^*, \ (n+1)r_1=(n+1)s_1 \implies C_s = C_r\]
+
+Probemos que esta es la única posibilidad llegando a un absurdo
+partiendo de $r_1 \neq s_1$.
+
+En este caso tendremos $r_1 < s_1$, extraemos el
+tiempo $r_1$ de la lista $S$, supondremos que se corresponde con $s_k$
+con $k > 1$. Tendremos entonces
+
+\begin{align*}
+  s_1 > r_1 = s_k& \qquad n+2-k < n+1 \\
+  s_1 > s_k& \qquad n+1 - (n+2-k) > 0 \\
+\end{align*}
+
+\vspace{-15mm}
+
+\begin{align*}    
+  (n+1-(n+2-k))s_1 > (n+1-(n+2-k))s_k \\
+  (n+1)s_1 - (n+2-k)s_1 > (n+1)s_k - (n+2-k)s_k
+\end{align*}
+
+y por tanto
+
+\[(n+1)s_1 + (n+2-k)s_k > (n+1)s_k + (n+2-k)s_1\]
+
+Esto significa que intercambiar las posiciones de los tiempos $s_1$ y
+$s_k$ en la lista $S$ produciría una suma de tiempos menor a la
+existente, lo que contradice la hipótesis de que $S$ es una solución
+óptima.
+
+\hfill\qedsymbol
+\end{document}
