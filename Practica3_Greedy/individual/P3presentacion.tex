@@ -1,0 +1,217 @@
+\documentclass[serif,9pt]{beamer}
+\usetheme{tree}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{caption}
+\usepackage{graphicx} % figuras
+\usepackage{subfigure} % subfiguras
+\usepackage{float}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{multirow}
+
+\usepackage{changepage}
+
+\restylefloat{figure}
+
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Contenido}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\setcounter{section}{-1}
+
+\begin{document}
+
+\title{Práctica 3: Algoritmos Greedy}  
+\author{David Cabezas Berrido}
+\date{}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Contenido}
+\tableofcontents
+\end{frame} 
+
+\section{El problema}
+
+\begin{frame}{El problema}
+Lista de reparaciones, con distintos tiempos
+\[T=[t_1,\ldots,t_n]\]
+Debemos minimizar el tiempo medio de espera de los clientes.
+\end{frame}
+
+\section{Caso de un único electricista}
+
+\subsection{Enfoque greedy}
+
+\begin{frame}{Enfoque greedy}
+\begin{enumerate}
+\item \textbf{Conjunto de candidatos:} Reparaciones a efectuar.
+  \pause
+\item \textbf{Candidatos ya usados:} Reparaciones ya efectuadas.
+  \pause
+\item \textbf{Criterio solución:} Una lista con todas las reparaciones
+  es solución.
+  \pause
+\item \textbf{Criterio factible:} Cualquier lista de reparaciones
+  puede llegar a ser solución.
+  \pause
+\item \textbf{Función de selección:} A determinar por el algoritmo.
+  \pause
+\item \textbf{Función objetivo:} A una lista solución le asocia la
+  suma de los tiempos de espera de los clientes (debemos minimizarla).
+\end{enumerate}
+\end{frame}
+
+\subsection{Deducción del algoritmo}
+
+\begin{frame}{Deducción del algoritmo}
+  Realizamos las tareas en orden de subíndice ($t_1,t_2,\ldots,t_n$).\\
+  \pause
+  $C_i$, tiempo de espera del cliente $i$-ésimo.
+  \[C_i=\sum_{j=1}^it_j\]
+  \pause
+  $C$, suma de los tiempos de espera de los clientes.
+  \[C = \sum_{i=1}^n C_i = \sum_{i=1}^n \sum_{j=1}^i t_j =
+    \sum_{i=1}^n(n+1-i)t_i\]
+  \pause
+  Solución: Realizar las reparaciones de menor a mayor tiempo
+  requerido.
+\end{frame}
+
+\subsection{Demostración}
+
+\begin{frame}{Demostración}
+  Por reducción al absurdo:
+  
+  \vspace{5mm}
+  
+  Sea $S=[s_1,s_2\ldots,s_n]$ la
+  permutación de $T$ que presenta la solución óptima. \\ \pause
+  Lleguemos a un absurdo suponiendo que $S$ no cumple
+  $s_1 \leq s_2 \leq \ldots \leq s_n$, esto es:
+  \[\exists p,q \in \{1,2,\ldots,n\} \mbox{ tales que } p<q \mbox{ y }
+    s_p > s_q\]
+  \pause
+  \vspace{-5mm}
+  \begin{align*}
+    s_p > s_q& \qquad n+1-q < n+1-p\\
+    s_p > s_q& \qquad ((n+1-p) - (n+q-q)) > 0 \\
+  \end{align*}
+  \pause
+  \vspace{-10mm}
+  \begin{align*}    
+    ((n+1-p) - (n+1-q))s_p > ((n+1-p) - (n+1-q))s_q \\
+    (n+1-p)s_p - (n+1-q)s_p > (n+1-p)s_q - (n+1-q)s_q
+  \end{align*}
+  \pause
+  y por tanto
+  \[(n+1-p)s_p + (n+1-q)s_q > (n+1-p)s_q + (n+1-q)s_p\]
+  lo que contradice a que $S$ sea la solución óptima. \\
+  \hfill\qedsymbol
+\end{frame}
+
+\section{Caso de varios electricistas}
+
+\subsection{Deducción del algoritmo}
+
+\begin{frame}{Planteamiento del problema}
+  Dividimos las tareas de $T$ en $p$ listas
+  \[T_k=[t^k_1,\ldots,t^k_{n_k}] \quad k=1,\ldots,p\]
+  \pause
+  Debemos minimizar
+  \[C=\sum_{k=1}^pC_k \qquad C_k=\sum_{i=1}^{n_k}(n_k+1-i)t_i^k \qquad
+    n=\sum_{k=1}^pn_k\]
+  \pause
+  Tendremos por lo anterior
+  \[t_1^k \leq t_2^k \leq \ldots \leq t_{n_k}^k\]
+  Queda razonar la mejor forma de repartir las tareas.
+\end{frame}
+
+\begin{frame}{Razonamiento}
+  Coeficientes de la sumatoria:
+  \begin{align*}
+    1,2,\ldots,n_1 \quad& (\text{electricista }1)\\
+    1,2,\ldots,n_2 \quad& (\text{electricista }2)\\
+    \vdots& \\
+    1,2,\ldots,n_k \quad& (\text{electricista }k)\\
+    \vdots& \\
+    1,2,\ldots,n_p \quad& (\text{electricista }p)
+  \end{align*}
+\end{frame}
+
+\subsection{Implementación}
+
+\begin{frame}[fragile]{Código}
+\begin{verbatim}
+    1  int optimo(vector<int> T){
+    2    
+    3    sort(T.begin(),T.end());
+    4  
+    5    vector<vector<int>> electricistas(p);
+    6    for(int i = 0; i < T.size(); i++)
+    7      electricistas[i%p].push_back(T[i]);
+    8  
+    9    int suma = 0;
+   10  
+   11    for(vector<int> e: electricistas)
+   12      suma += sumaTiempoEspera(e);
+   13  
+   14    return suma;
+   15  }
+\end{verbatim}
+\end{frame}
+
+\subsection{Ejemplo}
+
+\begin{frame}{Ejemplo}
+  $T=[2, 8, 5, 9, 2, 6, 15]$, 3 electricistas. \\
+  \pause
+  \vspace{5mm}
+  Ordenamos las reparaciones de menor a mayor tiempo requerido:
+  \[T'=[2, 2, 5, 6, 8, 9, 15]\]
+  \pause
+  Repartimos el trabajo entre los electricistas:
+  \begin{align*}
+    &T_1=[2,6,15] \\
+    &T_2=[2,8] \\
+    &T_3=[5,9]
+  \end{align*}
+  \pause
+  Suma de los tiempos de espera:
+  \[C=C_1+C_2+C_3=(2+8+23)+(2+10)+(5+14)=33+12+19=64\]
+\end{frame}
+
+\subsection{Simulaciones}
+
+\begin{frame}
+  Formato: Suma de los tiempos de espera del algoritmo/Mejor suma de
+  tiempos de espera de 100 formas aleatorias de distribuir las tareas.
+\begin{table}[H]
+\centering
+\caption*{Suma de los tiempos de espera en las distintas simulaciones}
+\label{tabla:simulaciones}
+\begin{adjustwidth}{-11.5mm}{}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{}} & \multicolumn{5}{c|}{n}     \\ \cline{3-7} 
+\multicolumn{2}{|c|}{}                  & 50 & 100 & 150 & 200 & 300 \\ \hline
+\multirow{4}{*}{p}         & 5          & 12105/12232 & 44294/44885 & 98028/98746 & 166911/167778 & 365856/367299 \\ \cline{2-7} 
+                           & 10         & 5287/5635 & 22536/23448 & 52148/53540 & 81574/83035 & 182824/185350 \\ \cline{2-7} 
+                           & 25         & 3520/4117 & 11905/13137 & 22167/24154 & 38595/41055 & 77201/81802 \\ \cline{2-7} 
+                           & 40         & 3120/3618 & 8007/9297 & 16855/19140 & 26263/29593 & 52326/57121 \\ \hline
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+\end{frame}
+
+\end{document}

@@ -4,6 +4,11 @@
   Simulador del problema de las reparaciones en
   el caso de varios electricistas. Tendremos
   n reparaciones y p electricistas.
+
+  Siempre se realizan las tareas de un electricista
+  ordenadas de menor a mayor tiempo, lo que optimiza el
+  tiempo de espera total. Por lo que esta simulación 
+  sólo depende de la forma de repartir los trabajos.
 */
 
 #include <iostream>
@@ -12,22 +17,34 @@
 
 using namespace std;
 
-int p, n;
+const int MIN = 10;
+const int MAX = 100;
+const int SIMULACIONESALEATORIAS = 100;
+int p;
 
-int sumaTiempoEspera(vector<int> v){
-  int suma = 0;
-  
-  for(int i = 0; i < v.size(); i++){
-    suma += v[i]*(n-i);
-  }
+int randInt(int min, int max){
+  int range = max-min;
+  return rand()%range + min;
 }
 
-int distribuyeYSuma(int* T, int n){
-  vector<vector<int>> electricistas(p);
+int sumaTiempoEspera(const vector<int> &v){
+  int suma = 0;
+  
   for(int i = 0; i < v.size(); i++)
-    electricistas[i%p].push_back(v[i]);
+    suma += v[i]*(v.size()-i);
 
-  int suma += 0;
+  return suma;
+}
+
+int optimo(vector<int> T){
+  
+  sort(T.begin(),T.end());
+
+  vector<vector<int>> electricistas(p);
+  for(int i = 0; i < T.size(); i++)
+    electricistas[i%p].push_back(T[i]);
+
+  int suma = 0;
 
   for(vector<int> e: electricistas)
     suma += sumaTiempoEspera(e);
@@ -35,25 +52,50 @@ int distribuyeYSuma(int* T, int n){
   return suma;
 }
 
+int random(vector<int> T){
+  
+  vector<vector<int>> electricistas(p);
+  
+  for(int i = 0; i < T.size(); i++)
+    electricistas[randInt(0,p)].push_back(T[i]);
+
+  int suma = 0;
+  for(vector<int> e: electricistas){
+    sort(e.begin(),e.end());
+    suma += sumaTiempoEspera(e);
+  }
+
+  return suma;  
+}
+
 int main(int argc, char* argv[]){
-i
+
   if(argc < 3){
     cout << "Formato: <nº reparaciones> <nº electricistas>" << endl;
     exit(-1);
   }
 
-  n = atoi(argv[1]);
+  int n = atoi(argv[1]);
   p = atoi(argv[2]);
 
-  int* T = new int[n];
-
-  int r;
   srand(time(0));
-  for(int i = 0; i < n; i++){
-    r = rand() %100 + 50;
-    T[i]=r;
-  }
-
+  
+  vector<int> T;
+    
   for(int i = 0; i < n; i++)
-    cout << T[i] << endl;
+    T.push_back(randInt(MIN,MAX));
+
+  cout << "Tiempo para el algoritmo óptimo: " << optimo(T) << endl;
+  cout << "Tiempos para soluciones aleatorias:\n";
+
+  int best = random(T);
+  int rt;
+  cout << best << "\t";
+  
+  for(int i = 0; i < SIMULACIONESALEATORIAS-1; i++){
+    rt = random(T);
+    cout << rt << "\t";
+    if(rt < best) best = rt;
+  }
+  cout << "\nMejor de los aleatorios: " << best << endl;
 }

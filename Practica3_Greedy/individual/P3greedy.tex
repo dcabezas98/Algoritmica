@@ -2,15 +2,15 @@
 
 \usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} 
 
-\usepackage[utf8]{inputenc}   % otra alternativa para los caracteres acentuados y la "Ã±"
+\usepackage[utf8]{inputenc} 
 \usepackage[           spanish % para poder usar el espaÃ±ol
                       ,es-tabla % para los captions de las tablas
                        ]{babel}   
-\decimalpoint %para usar el punto decimal en vez de coma para los nÃºmeros con decimales
+\decimalpoint
 
 \usepackage[bookmarks=true,
             bookmarksnumbered=false, % true means bookmarks in 
-                                     % left window are numbered              
+                                     % left window are numbered
             bookmarksopen=false,     % true means only level 1
                                      % are displayed.
             colorlinks=true,
@@ -22,6 +22,8 @@
 
 \usepackage{parskip}
 \usepackage{xcolor}
+
+\usepackage{multirow}
 
 \usepackage{amsmath,amssymb,amsthm}
 
@@ -80,12 +82,32 @@ algoritmo que tome una lista de tiempos de tareas como entrada y
 devuelva la permutación de la misma en la que el tiempo medio de
 espera de los clientes sea óptimo.
 
-\section{Resolución teórica: Un único electricista}
+Lo haremos también para el caso de varios electricistas.
+
+\section{Caso de un único electricista}
+
+\subsection{Enfoque greedy}
+\begin{enumerate}
+\item \textbf{Conjunto de candidatos:} Reparaciones a efectuar.
+\item \textbf{Candidatos ya usados:} Reparaciones ya efectuadas.
+\item \textbf{Criterio solución:} Una lista con todas las reparaciones
+  es solución.
+\item \textbf{Criterio factible:} Cualquier lista de reparaciones
+  puede llegar a ser solución.
+\item \textbf{Función de selección:} A determinar por el algoritmo.
+\item \textbf{Función objetivo:} A una lista solución le asocia la
+  suma de los tiempos de espera de los clientes (debemos minimizarla).
+\end{enumerate}
+
+Debemos determinar el orden de realización de las reparaciones que
+presente la menor suma de tiempos de espera de los clientes. Es decir,
+debemos encontrar un criterio para elegir que candidato pasar a la
+lista solución con el objetivo de que la suma de los tiempos de espera
+sea mínima.
 
 \subsection{Deducción del algoritmo}
-
 Las tareas se realizarán en el orden indicado por su subíndice:
-$[t_1, t_2,\ldots,t_n]$
+$[t_1, t_2,\ldots,t_n]$.
 
 Notaremos $C_i$ al tiempo de espera del cliente $i$-ésimo. Este tendrá
 que esperar a que se realicen tanto su reparación como todas las
@@ -104,6 +126,7 @@ menor cuando las reparaciones que requieren menos tiempo se realizan
 antes. Por ello, propongo como algoritmo realizar las tareas en orden
 de menor a mayor tiempo requerido.
 
+\newpage
 \subsection{Demostración de que produce la solución óptima}
 
 Para probar que este algoritmo produce la salida óptima, lo he hecho
@@ -193,18 +216,18 @@ decreciente, esto es
   > s_q\]
 Tendremos entonces
 \begin{align*}
-  s_p > s_q& \qquad n+1-q > n+1-p\\
-  s_p > s_q& \qquad ((n+1-q) - (n+q-p)) > 0 \\
+  s_p > s_q& \qquad n+1-q < n+1-p\\
+  s_p > s_q& \qquad ((n+1-p) - (n+q-q)) > 0 \\
 \end{align*}
 
 \vspace{-15mm}
 
 \begin{align*}    
-  ((n+1-q) - (n+q-p))s_p > ((n+1-q) - (n+q-p))s_q \\
-  (n+1-q)s_p - (n+1-p)s_p > (n+1-q)s_q - (n+1-p)s_q
+  ((n+1-p) - (n+1-q))s_p > ((n+1-p) - (n+1-q))s_q \\
+  (n+1-p)s_p - (n+1-q)s_p > (n+1-p)s_q - (n+1-q)s_q
 \end{align*}
 y por tanto
-\[(n+1-q)s_p + (n+1-p)s_q > (n+1-q)s_q + (n+1-p)s_p\]
+\[(n+1-p)s_p + (n+1-q)s_q > (n+1-p)s_q + (n+1-q)s_p\]
 
 Esto significa que intercambiar las posiciones de los tiempos $s_p$ y
 $s_q$ en la lista $S$ produciría una suma de tiempos menor a la
@@ -213,4 +236,112 @@ existente, lo que contradice la hipótesis de que $S$ es una solución
 $S=R$ como queríamos.
 
 \hfill\qedsymbol
+
+\section{Caso de varios electricistas}
+
+\subsection{Deducción del algoritmo}
+
+Supongamos que tenemos $p$ electricistas para repartirse las $n$
+reparaciones. Una vez que las distribuyamos, tendremos $p$ problemas
+de un único electricista y cuya suma de sus tamaños es $n$. En este
+caso, la suma de los tiempos de espera del problema inicial será la
+suma de los tiempos de espera de cada uno de los subproblemas, por lo
+que lo óptimo es que cada electricista priorice la tarea más corta de
+las que tenga asignadas.
+
+Llamaremos $T=[t_1,\ldots,t_n]$ al problema y
+$\{T_k=[t^k_1,\ldots,t^k_{n_k}]\}_{k=1}^p$ serán las listas
+correspondientes a los $p$ subproblemas de un electricista. Llamando
+$C$ al tiempo de espera total y $C_k$ ($k=1,\ldots,p$) al tiempo de
+espera de cada uno de los subproblemas obtenemos
+\[C=\sum_{k=1}^pC_k \qquad C_k=\sum_{i=1}^{n_k}(n_k+1-i)t_i^k \qquad
+  n=\sum_{k=1}^pn_k\]
+Por lo que hemos razonado antes, en cada sublista $T_k$ tendremos
+$t_1^k \leq t_2^k \leq \ldots \leq t_{n_k}^k$.
+
+Lo único que nos queda es razonar cuál es la mejor manera de repartir
+las tareas entre los electricistas para minimizar $C$.
+
+\newpage
+Antes hemos visto que la suma es mínima cuando los tiempos menores van
+multiplicados por los menores coeficientes. La lista de coeficientes
+de la sumatoria es:
+\begin{align*}
+1,2,\ldots,n_1 \quad& (\text{electricista }1)\\
+1,2,\ldots,n_2 \quad& (\text{electricista }2)\\
+\vdots& \\
+1,2,\ldots,n_k \quad& (\text{electricista }k)\\
+\vdots& \\
+1,2,\ldots,n_p \quad& (\text{electricista }p)                        
+\end{align*}
+Por tanto, para minimizar la sumatoria debemos asignar los $p$ menores
+tiempos a los $p$ electricistas (quedarán multiplicados por 1),
+después asignamos las $p$ siguientes tareas más cortas una a cada
+electricista (sus tiempos quedarán multiplicados por 2) y así
+sucesivamente. Al final pueden quedarnos menos de $p$ tareas y que
+algunos electricistas hagan menos reparaciones, por eso siempre
+debemos asignar la tarea más corta de cada grupo de $p$ siempre al
+mismo electricista.
+
+\subsection{Código del algoritmo}
+
+\begin{lstlisting}
+int optimo(vector<int> T){
+  
+  sort(T.begin(),T.end());
+
+  vector<vector<int>> electricistas(p);
+  for(int i = 0; i < T.size(); i++)
+    electricistas[i% p].push_back(T[i]);
+
+  int suma = 0;
+
+  for(vector<int> e: electricistas)
+    suma += sumaTiempoEspera(e);
+
+  return suma;
+}
+\end{lstlisting}
+
+\subsection{Ejemplo}
+$T=[2, 8, 5, 9, 2, 6, 15]$, 3 electricistas.
+
+Ordenamos las reparaciones de menor a mayor tiempo requerido:
+\[T'=[2, 2, 5, 6, 8, 9, 15]\]
+Repartimos el trabajo entre los electricistas:
+\begin{align*}
+  &T_1=[2,6,15] \\
+  &T_2=[2,8] \\
+  &T_3=[5,9]
+\end{align*}
+Suma de los tiempos de espera:
+\[C=C_1+C_2+C_3=(2+8+23)+(2+10)+(5+14)=33+12+19=64\]
+
+\newpage
+\subsection{Simulaciones}
+He realizado una serie de simulaciones en las que he comparado este
+algoritmo con formas aleatorias de distribuir las tareas, en siguiente
+tabla se muestran los resultados.
+
+Formato: Suma de los tiempos de espera del algoritmo/Mejor suma de tiempos de espera de 100 formas aleatorias de distribuir las tareas.
+
+\begin{table}[H]
+\centering
+\caption*{Suma de los tiempos de espera en las distintas simulaciones}
+\label{tabla:simulaciones}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{}} & \multicolumn{5}{c|}{n}     \\ \cline{3-7} 
+\multicolumn{2}{|c|}{}                  & 50 & 100 & 150 & 200 & 300 \\ \hline
+\multirow{4}{*}{p}         & 5          & 12105/12232 & 44294/44885 & 98028/98746 & 166911/167778 & 365856/367299 \\ \cline{2-7} 
+                           & 10         & 5287/5635 & 22536/23448 & 52148/53540 & 81574/83035 & 182824/185350 \\ \cline{2-7} 
+                           & 25         & 3520/4117 & 11905/13137 & 22167/24154 & 38595/41055 & 77201/81802 \\ \cline{2-7} 
+                           & 40         & 3120/3618 & 8007/9297 & 16855/19140 & 26263/29593 & 52326/57121 \\ \hline
+\end{tabular}
+\end{table}
+
+En todas las simulaciones, nuestro algoritmo ha obtenido mejores
+resultados que las 100 formas aleatorias de distribuir las tareas
+entre los electricistas.
+
 \end{document}
