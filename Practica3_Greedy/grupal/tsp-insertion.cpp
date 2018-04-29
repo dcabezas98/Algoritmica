@@ -8,23 +8,35 @@
 
 using namespace std;
 
+void mostrarInfo(){
+  cerr << "Ejemplo: ./tsp-insertion gr202\n";
+}
+
 int main(int argc, char *argv[]){
 
   if(argc < 2){
-    cerr << "Falta fichero\n";
+    cerr << "Formato incorrecto\n";
+    mostrarInfo();
     exit(-1);
   }
+
+  string nombre_entrada(argv[1]);
+  string nombre_salida(argv[1]);
+
+  nombre_entrada="datosTSP/" + nombre_entrada + ".tsp";
+  nombre_salida="salidas/" + nombre_salida + "_insertion.tsp";
   
-  ifstream f(argv[1]);
+  ifstream f(nombre_entrada);
   if(!f){
-    cerr << "Error apertura " << argv[1] << endl;
+    cerr << "Error apertura " << nombre_entrada << endl;
+    mostrarInfo();
     exit(-1);
   }
 
   int n;
-  string trash;
+  string dimension;
 
-  f >> trash;
+  f >> dimension;
   f >> n;
 
   if(n < 3){
@@ -49,6 +61,12 @@ int main(int argc, char *argv[]){
   vector<vector<int>> map(n);
 
   int distance;
+
+    /*
+    Como la matriz de distancias es simétrica, sólo hemos almacenado el triángulo inferior.
+    Por lo que para consultar la distancia entre las ciudades con índices i, j, hay 
+    que acceder de esta forma: map[max(i,j)][min(i,j)]
+  */
   
   for(i = 0; i < n; i++){
     for(j = 0; j < i; j++){
@@ -66,7 +84,7 @@ int main(int argc, char *argv[]){
     else if(xCords[i]<=xCords[minX]) minX = i;
   }
   
-  xCords.clear();
+  //xCords.clear();
 
   int maxY=0, yC = INT_MIN;
   for(i = 0; i < n; i++){
@@ -77,7 +95,7 @@ int main(int argc, char *argv[]){
       }
   }
   
-  yCords.clear();
+  //yCords.clear();
   
   /*
   for(i = 0; i < n; i++){
@@ -138,4 +156,22 @@ int main(int argc, char *argv[]){
   
   cout << result[n-1]+1 << endl;
   cout << "Distancia: " << sumDistances << endl;
+
+  ofstream of(nombre_salida);
+
+  if(!of){
+    cerr << "Error en la apertura de " << nombre_salida <<endl;
+    mostrarInfo();
+    exit(-1);
+  }
+
+  of << dimension << " " << n << endl;
+
+  for(i=0; i<n; i++)
+    of << result[i]+1 << " " << xCords[result[i]] << " " << yCords[result[i]] << endl;
+
+  of << result[0]+1 << " " << xCords[result[0]] << " " << yCords[result[0]] << endl;
+  
+  of.close();
+
 }
