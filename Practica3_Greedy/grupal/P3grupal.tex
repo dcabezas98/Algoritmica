@@ -140,7 +140,34 @@ El algoritmo está formado por dos bucles for anidados, ambos hacen n iteracione
 $$n*\sum_{k=1}^{n}k = n*\frac{(n+1)*n}{2} = \frac{n^3+n^2}{2}$$
 
 Luego el algoritmo es de $O(n^3)$
-  
+
+\subsubsection{Eficiencia empírica}
+
+\begin{tabular}{|c|c|} \hline
+\textbf{Tamaño}& 
+\textbf{Algoritmo de cercanía}
+  \\ \hline
+     16      & 0.000129  \\
+     22      & 0.000318  \\
+     48      & 0.000712  \\
+     70      & 0.002054  \\
+     101     & 0.005609            \\
+     150     & 0.016716  \\
+     202     & 0.035437  \\
+     280     & 0.086349    \\
+     442     & 0.331839    \\
+     561     & 0.671705  \\
+     666     & 1.116590       \\
+     1002    & 3.849760  \\
+     2392    & 50.81290   \\
+\hline
+\end{tabular}
+
+\begin{figure}[H]
+  \centering
+\subfigure[Cercanía]{\label{graf:ulysses16}\includegraphics[width=100mm]{graficas/ajustes/nearest.jpg}}
+\end{figure}
+
 \subsection{Algoritmo de inserción}
 
 Partimos de un recorrido parcial, que incluye la ciudad más al norte,
@@ -223,11 +250,142 @@ tendríamos la siguiente sumatoria:
 \end{align*}
 Y por lo tanto la eficiencia teórica del algoritmo es $O(n^3)$.
 
+\subsubsection{Eficiencia empírica}
+
+\begin{tabular}{|c|c|} \hline
+\textbf{Tamaño}& 
+\textbf{Algoritmo de inserción}
+  \\ \hline
+     16      & 0.000285  \\
+     22      & 0.000702  \\
+     48      & 0.002520  \\
+     70      & 0.006446  \\
+     101     & 0.019039            \\
+     150     & 0.054795  \\
+     202     & 0.121605  \\
+     280     & 0.314127    \\
+     442     & 1.295430    \\
+     561     & 2.619400  \\
+     666     & 4.445740       \\
+     1002    & 15.04680  \\
+     2392    & 217.6250   \\
+\hline
+\end{tabular}
+
+\begin{figure}[H]
+  \centering
+\subfigure[Inserción]{\label{graf:ulysses16}\includegraphics[width=100mm]{graficas/ajustes/insertion.jpg}}
+\end{figure}
+
 \subsection{Nuestra propuesta: Algoritmo double nearest}
+
+Nuestro algortimo busca cuales son las dos cuidades cuya suma de sus
+distancias es la mínima respecto a la última ciudad recorrida, por los que se seleccionan dos ciudades cada vez, gracias a tres bucles
+anidados.
+
+Se va rellenando en el vector de resultados con las ciudades con
+distancias más óptimas, y sumando el total de las distancias
+calculadas. Una vez se ha hecho esto, en cada iteración se borran las
+ciudades de los candidatos a recorrer, ya que no volveremos a pasar
+por ellas.
+
+Para decidir que ciudades son las optimas, para cada ciudad
+candidata se calcula la distancia entre ella y todas las demás ciudades, buscando el camino más optimo hacia cualquiera del resto de candidatos. Así escogemos las dos ciudades óptimas.
+
+Al salir de nuestro bucle anidado, si el numero de ciudades no era
+par, asignamos al último elemento del vector de resultados nuestra
+última ciudad candidata y sumamos la distancia de ésta a la anterior
+cuidad.  Para finalizar, añadimos al recorrido total la distancia de
+nuestra ultimo ciudad del camino a nuestra cuidad de origen. Ya
+tendríamos nuestro circuito óptimo.
 
 \subsubsection{Código}
 
+\begin{lstlisting}
+vector<int> result(n);
+result[0]=0;
+
+vector<int> candidates(n-1);
+
+for(i = 1; i < n; i++) candidates[i-1]=i;
+
+int sumDistances=0, d1, d2, bestD, bestCity1, bestCity2;
+
+for(int k = 1; k < (n+1)/2; k++){ // Relleno el vector result
+  bestD = INT_MAX;
+  for(i = 0; i < candidates.size(); i++){ // Para cada candidato
+    d1 = map[max(candidates[i],result[2*k-2])][min(candidates[i],result[2*k-2])];
+    d2 = INT_MAX;
+    for(j = 0; j < candidates.size(); j++){ // Para el resto de candidatos
+      if(candidates[j] != candidates[i]){
+        d2 = map[max(candidates[i],candidates[j])][min(candidates[i],candidates[j])];
+        if(d1 + d2 < bestD){
+          bestD = d1 + d2;
+          bestCity1 = candidates[i];
+          bestCity2 = candidates[j];
+	}
+      }
+    }
+  }
+  result[2*k-1] = bestCity1;
+  result[2*k] = bestCity2;
+  sumDistances += bestD;
+  candidates.erase(remove(candidates.begin(),candidates.end(),bestCity1));
+  candidates.erase(remove(candidates.begin(),candidates.end(),bestCity2));
+}
+
+if(!(n%2)){
+  result[n-1] = candidates[0];
+  sumDistances += map[max(result[n-1],result[n-2])][min(result[n-1],result[n-2])];
+}
+
+sumDistances += map[max(result[n-1],result[0])][min(result[n-1],result[0])];
+\end{lstlisting}
+
 \subsubsection{Eficiencia teórica}
+Veamos la eficiencia teórica del algoritmo que hemos ideado
+nosotros. Como vemos, el bucle externo del algoritmo se ejecuta n/2
+veces. Los dos bucles internos se ejecutarían n-2k
+(=candidates.size()) veces cada uno, siendo 2k el número de ciudades
+que ya hemos añadido al recorrido (k es el índice por el que va el
+bucle externo). Dado que están anidados uno dentro del otro estos se
+ejecutan en total $(n-2k)^2$ veces. Las funciones erase y remove son
+O(candidates.size())=O(n-2k). Por tanto, tenemos para calcular la
+eficiencia teórica la siguiente sumatoria (con j=n/2):
+
+  \begin{align*}
+  \sum_{k=1}^{\frac{n}{2}}[(n-2k)^2+n-2k] &=\sum_{k=1}^j[n^2+4k^2-4nk+n-2k]\\&=jn^2+4\frac{j(j+1)(2j+1)}{6}-4n\frac{j(j+1)}{2}+jn-2\frac{j(j+1)}{2}\\&=\frac{n^3}{2}+4\frac{\frac{n^3}{2}+\frac{n^2}{2}+n^2+n}{12}-\frac{n^3}{2}-n^2+\frac{n^2}{2}-\frac{\frac{n^2}{2}+n}{2}\\&=\frac{n^3}{2}+\frac{n^3}{6}+\frac{n^2}{6}+\frac{n^2}{3}+\frac{n}{3}-\frac{n^3}{2}-\frac{n^2}{2}-\frac{n^2}{4}-\frac{n}{2}\\&=\frac{n^3}{6}+\frac{n^2}{6}+\frac{n^2}{3}+\frac{n}{3}-n^2-\frac{n^2}{2}-\frac{n^2}{4}-\frac{n}{2}
+  \end{align*}
+  Eficiencia: $O(n^3)$.
+
+\subsubsection{Eficiencia empírica}
+
+\begin{tabular}{|c|c|} \hline
+\textbf{Tamaño}& 
+\textbf{Algoritmo double nearest}
+  \\ \hline
+     16      & 9.1e-05   \\
+     22      & 0.000288  \\
+     48      & 0.001181  \\
+     70      & 0.001640  \\
+     101     & 0.005582            \\
+     150     & 0.015294  \\
+     202     & 0.031035  \\
+     280     & 0.079450    \\
+     442     & 0.309697    \\
+     561     & 0.655716  \\
+     666     & 1.102970       \\
+     1002    & 3.842490  \\
+     2392    & 57.64050   \\
+\hline
+\end{tabular}
+
+\begin{figure}[H]
+  \centering
+\subfigure[Double nearest]{\label{graf:ulysses16}\includegraphics[width=100mm]{graficas/ajustes/doubleNearest.jpg}}
+\end{figure}
+
+
 
 \section{Resultados}
 
@@ -287,5 +445,9 @@ algoritmos en una serie de ejemplos y el peso de estos ciclos.
 \subfigure[Algoritmo de inserción. Peso = 316968]{\label{graf:pr1002_insertion}\includegraphics[width=55mm]{graficas/pr1002_insertion}}
 \subfigure[Algoritmo doubleNearest. Peso = 385020]{\label{graf:pr1002_...}\includegraphics[width=55mm]{graficas/pr1002_doubleNearest}}
 \end{figure}
+
+\section{Conclusión}
+
+
 
 \end{document}
