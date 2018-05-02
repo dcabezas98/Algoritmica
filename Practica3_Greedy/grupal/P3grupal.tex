@@ -127,14 +127,20 @@ el conjunto solución.
           dmin = distance;
         }
       }
-      sumDistances += dmin;
-      result[k] = i;
-    }
-
+    sumDistances += dmin;
+    result[k] = i;
+  }
+  
   sumDistances += map[max(result[0],result[n-1])][min(result[0],result[n-1])];  
 \end{lstlisting}
 
 \subsubsection{Eficiencia teórica}
+
+El algoritmo está formado por dos bucles for anidados, ambos hacen n iteraciones. Dentro del primer bucle hay tres operaciones, en las líneas 7, 17 y 18, de eficiencia $O(1)$, las cuales despreciaremos para el cálculo de la eficiencia. Dentro del segundo bucle hay dos \verb-if-, que contienen operaciones de $O(1)$ también despreciables. En el primer \verb-if-, la condición tiene un eficiencia de $O(k)$, donde $k$, donde $k$ es el tamaño del vector solución. Por lo tanto la eficicencia total del algoritmo es:
+
+$$n*\sum_{k=1}^{n}k = n*\frac{(n+1)*n}{2} = \frac{n^3+n^2}{2}$$
+
+Luego el algoritmo es de $O(n^3)$
   
 \subsection{Algoritmo de inserción}
 
@@ -197,7 +203,28 @@ vértices estén en el conjunto solución.
 
 \subsubsection{Eficiencia teórica}
 
-\subsection{Nuestra propuesta: Algoritmo ...} %Ver el de Dijstra
+Calculemos la eficiencia teórica del algoritmo de inserción para el
+problema del viajante de comercio. Sea n el número de ciudades. Como
+vemos tenemos un bucle externo en el cuál en cada iteración se escoge
+la siguiente ciudad del recorrido. Este bucle se ejecuta hasta que
+todas las ciudades estén en el recorrido, es decir, se ejecuta n-3
+veces. Podemos suponer que se ejecuta n veces. Supongamos que k es el
+tamaño del vector de ciudades que todavía no están en el
+recorrido. Por tanto, el bucle intermedio se ejecutaría k veces con k
+variando entre n y 0 (k va decreciendo en cada iteración del bucle
+externo), y el bucle interno se ejecuta n-k veces, pues se ejecuta
+tantas veces como ciudades ya hayamos metido en el recorrido. El
+interior del bucle interno es O(1). El interior del bucle interno
+tiene eficiencia O(n). Además, las operaciones de borrado e inserción
+al final del bucle externo tienen eficiencia O(n). Por tanto
+tendríamos la siguiente sumatoria:
+
+\begin{align*}
+\sum_{k=1}^{n}(k((n-k)+1)+n)&=\sum_{k=1}^{n}kn-\sum_{k=1}^{n}k^2+\sum_{k=1}^{n}k+\sum_{k=1}^{n}n\\&=n(\frac{n(n+1)}{2})-\frac{n(n+1)(2n+1)}{6}+\frac{n(n+1)}{2}+n^2\\&=\frac{3n^3+3n^2}{6}-\frac{2n^3+3n^2+n}{6}+\frac{n(n+1)}{2}+n^2\\&=\frac{n^3-n}{6}+\frac{n(n+1)}{2}+n^2
+\end{align*}
+Y por lo tanto la eficiencia teórica del algoritmo es $O(n^3)$.
+
+\subsection{Nuestra propuesta: Algoritmo ...}
 
 \subsubsection{Código}
 
