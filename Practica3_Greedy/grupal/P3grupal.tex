@@ -93,8 +93,7 @@ Primero identificamos las características propias de un problema greedy:
 \item \textbf{Criterio factible:} Cualquier lista de ciudades (no
   repetidas) puede llegar a ser solución.
 \item \textbf{Función de selección:} A determinar por el algoritmo.
-\item \textbf{Función objetivo:} A un ciclo solución le asocia la suma
-  de los pesos de las aristas de dicho ciclo (debemos minimizarla).
+\item \textbf{Función objetivo:} A un ciclo solución le asocia la suma de los pesos de las aristas de dicho ciclo (debemos minimizarla).
 \end{enumerate}
 
 \section{Algoritmos}
@@ -136,7 +135,7 @@ el conjunto solución.
 
 \subsubsection{Eficiencia teórica}
 
-El algoritmo está formado por dos bucles for anidados, ambos hacen n iteraciones. Dentro del primer bucle hay tres operaciones, en las líneas 7, 17 y 18, de eficiencia $O(1)$, las cuales despreciaremos para el cálculo de la eficiencia. Dentro del segundo bucle hay dos \verb-if-, que contienen operaciones de $O(1)$ también despreciables. En el primer \verb-if-, la condición tiene un eficiencia de $O(k)$, donde $k$, donde $k$ es el tamaño del vector solución. Por lo tanto la eficicencia total del algoritmo es:
+El algoritmo está formado por dos bucles for anidados, ambos hacen n iteraciones. Dentro del primer bucle hay tres operaciones, en las líneas 7, 17 y 18, de eficiencia $O(1)$, las cuales despreciaremos para el cálculo de la eficiencia. Dentro del segundo bucle hay dos \verb-if-, que contienen operaciones de $O(1)$ también despreciables. En el primer \verb-if-, la condición (función find) tiene un eficiencia de $O(k)$, donde $k$, donde $k$ es el tamaño del vector solución. Por lo tanto la eficicencia total del algoritmo es:
 
 $$n*\sum_{k=1}^{n}k = n*\frac{(n+1)*n}{2} = \frac{n^3+n^2}{2}$$
 
