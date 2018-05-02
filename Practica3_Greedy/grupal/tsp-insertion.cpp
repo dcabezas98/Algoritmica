@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <climits>
 #include <iterator>
+#include <ctime>
 
 using namespace std;
 
@@ -131,6 +132,10 @@ int main(int argc, char *argv[]){
   int bestD;
   int d;
 
+  clock_t t_antes, t_despues;
+
+  t_antes = clock();
+
   while(candidates.size()>0){ // Mientras que queden candidatos (ciudades sin recorrer)
     for(i = 0; i < candidates.size(); i++){ //Recorro las ciudades
       bestD = INT_MAX;
@@ -149,7 +154,9 @@ int main(int argc, char *argv[]){
     candidates.erase(remove(candidates.begin(),candidates.end(),bestCity)); //borro la ciudad del vector de candidatos
     sumDistances += bestD; //Sumo la distancia a la distancia total del recorrido
   }
-  
+
+  t_despues = clock();
+
   cout << "Recorrido: ";
   for(i = 0; i < n-1; i++)
     cout << result[i]+1 << ", ";
@@ -173,4 +180,6 @@ int main(int argc, char *argv[]){
   of << result[0]+1 << " " << xCords[result[0]] << " " << yCords[result[0]] << endl;
   
   of.close();
+
+  cout << n << "\t" << (t_despues-t_antes)/(float)CLOCKS_PER_SEC << endl;
 }

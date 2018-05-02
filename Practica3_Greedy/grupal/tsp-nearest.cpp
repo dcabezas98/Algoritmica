@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <climits>
 #include <string>
+#include <ctime>
 
 using namespace std;
 
@@ -81,6 +82,11 @@ int main(int argc, char *argv[]){
 
   int dmin;
   int sumDistances=0;
+
+  clock_t t_antes, t_despues;
+
+  t_antes = clock();
+  
   for(int k = 1; k < n; k++){ //Relleno el vector de resultados
     dmin = INT_MAX;
     for(j = 0; j < n; j++) //Recorro todas las cuidades buscando cual de ellas está mas cerca de la última escogida
@@ -97,6 +103,8 @@ int main(int argc, char *argv[]){
 
   sumDistances += map[max(result[0],result[n-1])][min(result[0],result[n-1])];
 
+  t_despues = clock();
+  
   cout << "Recorrido: ";
   for(i = 0; i < n-1; i++)
     cout << result[i]+1 << ", ";
@@ -120,4 +128,6 @@ int main(int argc, char *argv[]){
   of << result[0]+1 << " " << xCords[result[0]] << " " << yCords[result[0]] << endl;
 
   of.close();
+
+  cout << n << "\t" << (t_despues-t_antes)/(float)CLOCKS_PER_SEC << endl;
 }

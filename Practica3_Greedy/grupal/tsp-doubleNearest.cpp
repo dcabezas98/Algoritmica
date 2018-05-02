@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <climits>
 #include <iterator>
+#include <ctime>
 
 using namespace std;
 
@@ -96,7 +97,11 @@ int main(int argc, char *argv[]){
 
   int sumDistances=0, d1, d2, bestD, bestCity1, bestCity2;
 
-  for(int k = 1; k < n/2; k++){ // Relleno el vector result
+  clock_t t_antes, t_despues;
+
+  t_antes = clock();
+  
+  for(int k = 1; k < (n+1)/2; k++){ // Relleno el vector result
     bestD = INT_MAX;
     for(i = 0; i < candidates.size(); i++){ // Para cada candidato
       d1 = map[max(candidates[i],result[2*k-2])][min(candidates[i],result[2*k-2])];
@@ -119,13 +124,15 @@ int main(int argc, char *argv[]){
     candidates.erase(remove(candidates.begin(),candidates.end(),bestCity2));
   }
 
+  t_despues = clock();
+
   if(!(n%2)){
     result[n-1] = candidates[0];
     sumDistances += map[max(result[n-1],result[n-2])][min(result[n-1],result[n-2])];
   }
 
   sumDistances += map[max(result[n-1],result[0])][min(result[n-1],result[0])];
-  
+
   cout << "Recorrido: ";
   for(i = 0; i < n-1; i++)
     cout << result[i]+1 << ", ";
@@ -149,4 +156,7 @@ int main(int argc, char *argv[]){
   of << result[0]+1 << " " << xCords[result[0]] << " " << yCords[result[0]] << endl;
   
   of.close();
+  
+  
+  cout << n << "\t" << (t_despues-t_antes)/(float)CLOCKS_PER_SEC << endl;
 }
