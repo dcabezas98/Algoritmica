@@ -133,6 +133,8 @@ el conjunto solución.
   sumDistances += map[max(result[0],result[n-1])][min(result[0],result[n-1])];  
 \end{lstlisting}
 
+\newpage
+
 \subsubsection{Eficiencia teórica}
 
 El algoritmo está formado por dos bucles for anidados, ambos hacen n iteraciones. Dentro del primer bucle hay tres operaciones, en las líneas 7, 17 y 18, de eficiencia $O(1)$, las cuales despreciaremos para el cálculo de la eficiencia. Dentro del segundo bucle hay dos \verb-if-, que contienen operaciones de $O(1)$ también despreciables. En el primer \verb-if-, la condición (función find) tiene un eficiencia de $O(k)$, donde $k$, donde $k$ es el tamaño del vector solución. Por lo tanto la eficicencia total del algoritmo es:
@@ -178,6 +180,7 @@ rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00992738
 variance of residuals (reduced chisquare) = WSSR/ndf   : 9.85529e-05
 \end{verbatim}
 
+\vspace{5mm}
 Luego la gráfica que ajusta la función es:  $3.58701*10^{-9}x^3 + 3.55782*10^{-7}x^2 - 0.000135481x + 0.00906667$ 
 
 \begin{figure}[H]
@@ -289,7 +292,7 @@ Y por lo tanto la eficiencia teórica del algoritmo es $O(n^3)$.
 \hline
 \end{tabular}
 
-\vspace{5mm}
+\newpage
 \textbf{Coeficientes del ajuste:}
 \begin{verbatim}
 Final set of parameters            Asymptotic Standard Error
@@ -332,6 +335,8 @@ par, asignamos al último elemento del vector de resultados nuestra
 cuidad.  Para finalizar, añadimos al recorrido total la distancia de
 nuestra ultimo ciudad del camino a nuestra cuidad de origen. Ya
 tendríamos nuestro circuito óptimo.
+
+\newpage
 
 \subsubsection{Código}
 
