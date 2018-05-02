@@ -163,6 +163,23 @@ Luego el algoritmo es de $O(n^3)$
 \hline
 \end{tabular}
 
+\vspace{5mm}
+\textbf{Coeficientes del ajuste:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 3.58701e-09      +/- 1.914e-11    (0.5336%)
+b               = 3.55782e-07      +/- 6.155e-08    (17.3%)
+c               = -0.000135481     +/- 4.139e-05    (30.55%)
+d               = 0.00906667       +/- 0.005465     (60.28%)
+
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00992738
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.85529e-05
+\end{verbatim}
+
+Luego la gráfica que ajusta la función es:  $3.58701*10^{-9}x^3 + 3.55782*10^{-7}x^2 - 0.000135481x + 0.00906667$ 
+
 \begin{figure}[H]
   \centering
 \subfigure[Cercanía]{\label{graf:ulysses16}\includegraphics[width=100mm]{graficas/ajustes/nearest.jpg}}
@@ -272,6 +289,23 @@ Y por lo tanto la eficiencia teórica del algoritmo es $O(n^3)$.
 \hline
 \end{tabular}
 
+\vspace{5mm}
+\textbf{Coeficientes del ajuste:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 1.69297e-08      +/- 1.007e-10    (0.5945%)
+b               = -2.87207e-06     +/- 3.237e-07    (11.27%)
+c               = 0.00100639       +/- 0.0002177    (21.63%)
+d               = -0.0541579       +/- 0.02874      (53.07%)
+
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0522078
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00272565
+\end{verbatim}
+
+Luego la gráfica que ajusta la función es: $1.69297*10^{-8}x^3 - 2.87207*10^{-6}x^2 + 0.00100639x - 0.0541579$ 
+
 \begin{figure}[H]
   \centering
 \subfigure[Inserción]{\label{graf:ulysses16}\includegraphics[width=100mm]{graficas/ajustes/insertion.jpg}}
@@ -380,12 +414,27 @@ eficiencia teórica la siguiente sumatoria (con j=n/2):
 \hline
 \end{tabular}
 
+\vspace{5mm}
+\textbf{Coeficientes del ajuste:}
+\begin{verbatim}
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 4.61334e-09      +/- 2.595e-11    (0.5626%)
+b               = -1.09743e-06     +/- 8.346e-08    (7.605%)
+c               = 0.000332856      +/- 5.612e-05    (16.86%)
+d               = -0.0161545       +/- 0.007411     (45.87%)
+
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0134615
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000181212
+\end{verbatim}
+
+Luego la gráfica que ajusta la función es: $4.61334*10^{-9}x^3 - 1.09743*10^{-6}x^2 + 0.000332856x - 0.0161545 $ 
+
 \begin{figure}[H]
   \centering
 \subfigure[Double nearest]{\label{graf:ulysses16}\includegraphics[width=100mm]{graficas/ajustes/doubleNearest.jpg}}
 \end{figure}
-
-
 
 \section{Resultados}
 
