@@ -1,0 +1,36 @@
+
+
+*******************************************************************************
+Tue Mar 27 00:08:27 2018
+
+
+FIT:    data read from 'tiempos/pos_OBVIO.dat'
+        format = z
+        #datapoints = 25
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 5.5250064739e+13   0.00e+00  1.05e+06    1.000000e+00   1.000000e+00
+  10 7.8427146390e-08  -2.10e-04  1.05e-04    2.374815e-09  -2.479170e-05
+
+After 10 iterations the fit converged.
+final sum of squares of residuals : 7.84271e-08
+rel. change during last iteration : -2.09549e-09
+
+degrees of freedom    (FIT_NDF)                        : 23
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 5.83941e-05
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.40988e-09
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.37482e-09      +/- 1.62e-11     (0.682%)
+b               = -2.47917e-05     +/- 2.408e-05    (97.12%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.874  1.000 
