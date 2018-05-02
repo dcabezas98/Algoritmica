@@ -126,6 +126,13 @@ greedy distintos.
   % n: tamaño del vector candidates
 \end{frame}
 
+\begin{frame}[fragile]\frametitle{Eficiencia híbrida}
+\begin{figure}[H]
+  \centering
+  \subfigure[$f(x)=3.58701\mbox{e}-09x^3+3.55782\mbox{e}-07x^2-0.000135481x+0.00906667$; \hspace{3mm} RMS=0.00992738]{\label{ajust:nearest}\includegraphics[width=70mm]{graficas/ajustes/nearest}}
+\end{figure}
+\end{frame}
+
 \subsection{Algoritmo de insercción}
 
 \begin{frame}
@@ -148,6 +155,7 @@ while(candidates.size()>0){
       if(d < bestD){
         bestCity = candidates[i];
         bestPosition = (j+1)%result.size();
+
         bestD = d;
       }
     }
@@ -161,9 +169,16 @@ while(candidates.size()>0){
 
 \begin{frame}\frametitle{Eficiencia Teórica}
 \begin{align*}
-\sum_{k=1}^{n}(k((n-k)+1)+n)&=\sum_{k=1}^{n}kn-\sum_{k=1}^{n}k^2+\sum_{k=1}^{n}k+\sum_{k=1}^{n}n\\&=n(\frac{n(n+1)}{2})-\frac{n(n+1)(2n+1)}{6}+\frac{n(n+1)}{2}+n^2\\&=\frac{3n^3+3n^2}{6}-\frac{2n^3+3n^2+n}{6}+\frac{n(n+1)}{2}+n^2\\&=\frac{n^3-n}{6}+\frac{n(n+1)}{2}+n^2
+\sum_{k=1}^{n}(k((n-k)+1)+n)&=\sum_{k=1}^{n}kn-\sum_{k=1}^{n}k^2+\sum_{k=1}^{n}k+\sum_{k=1}^{n}n\\&=n(\frac{n(n+1)}{2})-\frac{n(n+1)(2n+1)}{6}+\frac{n(n+1)}{2}+n^2\\&=\frac{3n^3+3n^2}{6}-\frac{2n^3+3n^2+n}{6}+\frac{n(n+1)}{2}+n^2 \\ &=\frac{n^3-n}{6}+\frac{n(n+1)}{2}+n^2
 \end{align*}
   Eficiencia: $O(n^3)$
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Eficiencia híbrida}
+\begin{figure}[H]
+  \centering
+  \subfigure[$f(x)=1.69297\mbox{e}-08x^3-2.87207\mbox{e}-06x^2+0.00100639x-0.0541579$; \hspace{3mm} RMS=0.0522078]{\label{ajust:insertion}\includegraphics[width=70mm]{graficas/ajustes/insertion}}
+\end{figure}
 \end{frame}
 
 \subsection{Nuestro Algoritmo: Double Nearest}
@@ -211,10 +226,10 @@ for(int k = 1; k < n/2; k++){
 Eficiencia: $O(n^3)$.
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]\frametitle{Eficiencia híbrida}
 \begin{figure}[H]
   \centering
-  \subfigure[$f(x)=1.69297\mbox{e}-08x^3-2.87207\mbox{e}-06x^2+0.00100639x-0.0541579$ \\ RSM=0.0134615]{\label{ajust:doubleNearest}\includegraphics[width=70mm]{graficas/ajustes/doubleNearest}}
+  \subfigure[$f(x)=4.61334\mbox{e}-09x^3-1.09743e-06\mbox{e}-06x^2+0.000332856x-0.0161545$; \hspace{3mm} RMS=0.0134615]{\label{ajust:doubleNearest}\includegraphics[width=70mm]{graficas/ajustes/doubleNearest}}
 \end{figure}
 \end{frame}
 
