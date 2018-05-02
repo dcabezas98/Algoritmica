@@ -32,6 +32,13 @@
   breakatwhitespace=false, 
 }
 
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>{Contenido}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
 \definecolor{darkorange}{rgb}{0.94,0.4,0.0}
 
 \begin{document}
@@ -204,6 +211,13 @@ for(int k = 1; k < n/2; k++){
 Eficiencia: $O(n^3)$.
 \end{frame}
 
+\begin{frame}
+\begin{figure}[H]
+  \centering
+  \subfigure[$f(x)=1.69297\mbox{e}-08x^3-2.87207\mbox{e}-06x^2+0.00100639x-0.0541579$ \\ RSM=0.0134615]{\label{ajust:doubleNearest}\includegraphics[width=70mm]{graficas/ajustes/doubleNearest}}
+\end{figure}
+\end{frame}
+
 \section{Resultados}
 
 \begin{frame}\frametitle{ulysses16}
@@ -213,7 +227,7 @@ Eficiencia: $O(n^3)$.
 \subfigure[\tiny Ciudades]{\label{graf:ulysses16}\includegraphics[width=45mm]{graficas/ulysses16}}
 \subfigure[\tiny Algoritmo de cercanía. Peso = 103]{\label{graf:ulysses16_nearest}\includegraphics[width=45mm]{graficas/ulysses16_nearest}}
 \subfigure[\tiny Algoritmo de inserción. Peso = 72]{\label{graf:ulysses16_insertion}\includegraphics[width=45mm]{graficas/ulysses16_insertion}}
-\subfigure[\tiny Algoritmo doubleNearest. Peso = 101]{\label{graf:ulysses16_...}\includegraphics[width=45mm]{graficas/ulysses16_doubleNearest}}
+\subfigure[\tiny Algoritmo doubleNearest. Peso = 101]{\label{graf:ulysses16_doubleNearest}\includegraphics[width=45mm]{graficas/ulysses16_doubleNearest}}
 \end{figure}
 \end{frame}
 
@@ -225,7 +239,7 @@ Eficiencia: $O(n^3)$.
 \subfigure[\tiny Ciudades]{\label{graf:st70}\includegraphics[width=45mm]{graficas/st70}}
 \subfigure[\tiny Algoritmo de cercanía. Peso = 830]{\label{graf:st70_nearest}\includegraphics[width=45mm]{graficas/st70_nearest}}
 \subfigure[\tiny Algoritmo de inserción. Peso = 754]{\label{graf:st70_insertion}\includegraphics[width=45mm]{graficas/st70_insertion}}
-\subfigure[\tiny Algoritmo doubleNearest. Peso = 958]{\label{graf:st70_...}\includegraphics[width=45mm]{graficas/st70_doubleNearest}}
+\subfigure[\tiny Algoritmo doubleNearest. Peso = 958]{\label{graf:st70_doubleNearest}\includegraphics[width=45mm]{graficas/st70_doubleNearest}}
 \end{figure}
 \end{frame}
 
@@ -237,7 +251,7 @@ Eficiencia: $O(n^3)$.
 \subfigure[\tiny Ciudades]{\label{graf:gr202}\includegraphics[width=45mm]{graficas/gr202}}
 \subfigure[\tiny Algoritmo de cercanía. Peso = 651]{\label{graf:gr202_nearest}\includegraphics[width=45mm]{graficas/gr202_nearest}}
 \subfigure[\tiny Algoritmo de inserción. Peso = 554]{\label{graf:gr202_insertion}\includegraphics[width=45mm]{graficas/gr202_insertion}}
-\subfigure[\tiny Algoritmo doubleNearest. Peso = 688]{\label{graf:gr202_...}\includegraphics[width=45mm]{graficas/gr202_doubleNearest}}
+\subfigure[\tiny Algoritmo doubleNearest. Peso = 688]{\label{graf:gr202_doubleNearest}\includegraphics[width=45mm]{graficas/gr202_doubleNearest}}
 \end{figure}
 \end{frame}
 
@@ -249,7 +263,7 @@ Eficiencia: $O(n^3)$.
 \subfigure[\tiny Ciudades]{\label{graf:gr666}\includegraphics[width=45mm]{graficas/gr666}}
 \subfigure[\tiny Algoritmo de cercanía. Peso = 4046]{\label{graf:gr666_nearest}\includegraphics[width=45mm]{graficas/gr666_nearest}}
 \subfigure[\tiny Algoritmo de inserción. Peso = 3656]{\label{graf:gr666_insertion}\includegraphics[width=45mm]{graficas/gr666_insertion}}
-\subfigure[\tiny Algoritmo doubleNearest. Peso = 4452]{\label{graf:gr666_...}\includegraphics[width=45mm]{graficas/gr666_doubleNearest}}
+\subfigure[\tiny Algoritmo doubleNearest. Peso = 4452]{\label{graf:gr666_doubleNearest}\includegraphics[width=45mm]{graficas/gr666_doubleNearest}}
 \end{figure}
 \end{frame}
 
@@ -261,7 +275,7 @@ Eficiencia: $O(n^3)$.
 \subfigure[\tiny Ciudades]{\label{graf:pr1002}\includegraphics[width=45mm]{graficas/pr1002}}
 \subfigure[\tiny Algoritmo de cercanía. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=45mm]{graficas/pr1002_nearest}}
 \subfigure[\tiny Algoritmo de inserción. Peso = 316968]{\label{graf:pr1002_insertion}\includegraphics[width=45mm]{graficas/pr1002_insertion}}
-\subfigure[\tiny Nuestro algoritmo. Peso = 385020]{\label{graf:pr1002_...}\includegraphics[width=45mm]{graficas/pr1002_doubleNearest}}
+\subfigure[\tiny Nuestro algoritmo. Peso = 385020]{\label{graf:pr1002_doubleNearest}\includegraphics[width=45mm]{graficas/pr1002_doubleNearest}}
 \end{figure}
 \end{frame}
 
