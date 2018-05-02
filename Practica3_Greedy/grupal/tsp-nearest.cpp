@@ -81,10 +81,9 @@ int main(int argc, char *argv[]){
 
   int dmin;
   int sumDistances=0;
-  for(int k = 1; k < n; k++){
+  for(int k = 1; k < n; k++){ //Relleno el vector de resultados
     dmin = INT_MAX;
-
-    for(j = 0; j < n; j++)
+    for(j = 0; j < n; j++) //Recorro todas las cuidades buscando cual de ellas está mas cerca de la última escogida
       if(find(result.begin(),result.end(),j) == result.end()){
 	distance = map[max(j,result[k-1])][min(j,result[k-1])];
 	if(distance < dmin){
