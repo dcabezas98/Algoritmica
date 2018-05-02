@@ -128,9 +128,9 @@ int main(int argc, char *argv[]){
   
   cout << "Recorrido: ";
   for(i = 0; i < n-1; i++)
-    cout << result[i] << ", ";
+    cout << result[i]+1 << ", ";
   
-  cout << result[n-1] << endl;
+  cout << result[n-1]+1 << endl;
   cout << "Distancia: " << sumDistances << endl;
   
   ofstream of(nombre_salida);
