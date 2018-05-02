@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
 
   int distance;
 
-    /*
+  /*
     Como la matriz de distancias es simétrica, sólo hemos almacenado el triángulo inferior.
     Por lo que para consultar la distancia entre las ciudades con índices i, j, hay 
     que acceder de esta forma: map[max(i,j)][min(i,j)]
@@ -173,5 +173,4 @@ int main(int argc, char *argv[]){
   of << result[0]+1 << " " << xCords[result[0]] << " " << yCords[result[0]] << endl;
   
   of.close();
-
 }
