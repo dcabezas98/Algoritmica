@@ -1,0 +1,76 @@
+\documentclass[a4]{article}
+
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} 
+
+\usepackage[utf8]{inputenc} 
+\usepackage[           spanish % para poder usar el espaÃ±ol
+                      ,es-tabla % para los captions de las tablas
+                       ]{babel}   
+\decimalpoint
+
+\usepackage[bookmarks=true,
+            bookmarksnumbered=false, % true means bookmarks in 
+                                     % left window are numbered
+            bookmarksopen=false,     % true means only level 1
+                                     % are displayed.
+            colorlinks=true,
+            linkcolor=blue,
+            urlcolor=cyan]{hyperref}
+            
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{parskip}
+\usepackage{xcolor}
+
+\usepackage{multirow}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{caption}
+
+\usepackage{listings}
+\lstset
+{ %Formatting for code in appendix
+  language=C++, % choose the language of the code
+  basicstyle=\fontfamily{pcr}\selectfont\footnotesize\color{black},
+  keywordstyle=\color{darkorange}\bfseries, % style for keywords
+  numbers=left, % where to put the line-numbers
+  numberstyle=\tiny, % the size of the fonts that are used for the line-numbers     
+  backgroundcolor=\color{white},
+  showspaces=false, % show spaces adding particular underscores
+  showstringspaces=false, % underline spaces within strings
+  showtabs=false, % show tabs within strings adding particular underscores
+  tabsize=2, % sets default tabsize to 2 spaces
+  captionpos=b, % sets the caption-position to bottom
+  breaklines=false, % sets automatic line breaking
+  breakatwhitespace=false, 
+}
+
+\usepackage{enumerate}% paquete para poder personalizar fÃ¡cilmente la apariencia de las listas enumerativas
+
+\usepackage{graphicx} % figuras
+\usepackage{subfigure} % subfiguras
+
+\definecolor{darkorange}{rgb}{0.94,0.4,0.0}
+	
+\usepackage{float} % para controlar la situaciÃ³n de los entornos flotantes
+
+\restylefloat{figure}
+\restylefloat{table} 
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\author{David Cabezas Berrido}
+\date{\vspace{-5mm}}
+
+\title{\huge Práctica 3: Algoritmos Greedy \HRule\vspace{-4mm}}
+
+\setcounter{section}{-1}
+
+\begin{document}
+\maketitle
+\vspace{20mm}
+\tableofcontents
+
+\end{document}
