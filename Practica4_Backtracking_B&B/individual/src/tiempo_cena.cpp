@@ -95,7 +95,7 @@ public:
     int maxA = afActual;
     int max1, max2;
 
-    for(int i = 0; i < n; i++)
+    for(int i = 1; i < n; i++)
       if(find(sentados.begin(),sentados.end(),i)==sentados.end()){
 	mayoresAfinidades(i,max1,max2);
 	maxA += max1+max2; 
@@ -128,7 +128,7 @@ void backtracking(const Cena& cena, const vector<int> &sentados, vector<int> &be
   int aff;
   vector<int> aux;
   
-  for(int i = 0; i < cena.getN(); i++){
+  for(int i = 1; i < cena.getN(); i++){
     aff = currentAffinity;
     aux = sentados;
     if(find(sentados.begin(),sentados.end(),i)==sentados.end()){
