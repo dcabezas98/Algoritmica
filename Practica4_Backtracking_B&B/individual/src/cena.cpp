@@ -147,6 +147,11 @@ int main(int argc, char* argv[]){
 
   int n = atoi(argv[1]);
 
+  if(n<3){
+    cout << "Se necesitan al menos 3 comensales\n";
+    exit(-1);
+  }
+
   srand(time(0));
 
   Cena cena(n);

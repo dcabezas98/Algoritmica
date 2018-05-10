@@ -100,7 +100,7 @@ public:
 	mayoresAfinidades(i,max1,max2);
 	maxA += max1+max2; 
       }
-    // Se asumen al menos dos personas sentados
+    
     mayoresAfinidades(sentados.front(),max1,max2);
     maxA += max1;
     mayoresAfinidades(sentados.back(),max1,max2);
@@ -147,6 +147,11 @@ int main(int argc, char* argv[]){
   }
 
   int n = atoi(argv[1]);
+
+  if(n<3){
+    cout << "Se necesitan al menos 3 comensales\n";
+    exit(-1);
+  }
   
   int suma = 0;
   for(int k = 0; k < 10; k++){
