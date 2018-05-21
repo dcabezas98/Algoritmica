@@ -162,15 +162,21 @@ int main(int argc, char* argv[]){
   vector<int> bestSol(tsp.getN());
   vector<int> visited;
 
+  clock_t t1, t2;
+  t1 = clock();
   for(int i = 0; i < tsp.getN(); i++) bestSol[i] = i; // Solución de referencia inicial
   int weight = tsp.totalWeight(bestSol);
   visited.push_back(0);
   backtracking(tsp, visited, bestSol, 0, weight);
-
+  t2 = clock();
+  
   cout << "Recorrido:\n";
   printVector(bestSol);
   cout << "Peso total: " << weight << endl;
 
+  cout << "Tamaño\ttiempo" << endl;
+  cout << tsp.getN() << "\t" << (t2-t1)/(float)CLOCKS_PER_SEC << endl;
+  
   ofstream of(nombre_salida);
 
   if(!of){
@@ -183,8 +189,6 @@ int main(int argc, char* argv[]){
 
   for(int i=0; i<tsp.getN(); i++)
     of << bestSol[i]+1 << " " << tsp.xCords[bestSol[i]] << " " << tsp.yCords[bestSol[i]] << endl;
-
-  of << bestSol[0]+1 << " " << tsp.xCords[bestSol[0]] << " " << tsp.yCords[bestSol[0]] << endl;
   
   of.close();
 }
