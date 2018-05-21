@@ -92,7 +92,7 @@ public:
     assert(solution.size() == n);
     int weight = 0;
     for(int i = 0; i < n; i++)
-      weight += getDistance(solution(i),solution((i-1+n)%n));
+      weight += getDistance(solution[i],solution[(i-1+n)%n]);
 
     return weight;
   }
