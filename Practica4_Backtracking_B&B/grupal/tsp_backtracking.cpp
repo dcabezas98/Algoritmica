@@ -82,7 +82,7 @@ public:
   }
 
   int getDistance(int i, int j) const{
-    if(0 <= i && i < n && 0 <= j && j < n)
+    if(0 <= i && i < n && 0 <= j && j < n && i!=j)
       return map[max(i,j)][min(i,j)];
 
     return INT_MAX; // Para evitar considerar la distancia de una ciudad a sí misma
@@ -92,7 +92,7 @@ public:
     assert(solution.size() == n);
     int weight = 0;
     for(int i = 0; i < n; i++)
-      weight += getDistance(solution[i],solution[(i-1+n)%n]);
+      weight += getDistance(solution[i],solution[(i+1)%n]);
 
     return weight;
   }
@@ -114,6 +114,8 @@ public:
     for(int i = 1; i < n; i++)
       if(find(visited.begin(),visited.end(),i)==visited.end())
 	bound += bestDistance(i);
+
+    bound += bestDistance(visited.front());
 
     return bound;
   }
@@ -163,7 +165,7 @@ int main(int argc, char* argv[]){
 
   TSP tsp(nombre_entrada);
 
-  // tsp.printMap(); cout << endl;
+  tsp.printMap(); cout << endl;
 
   vector<int> bestSol(tsp.getN());
   vector<int> visited;
@@ -178,6 +180,7 @@ int main(int argc, char* argv[]){
   
   cout << "Recorrido:\n";
   printVector(bestSol);
+
   cout << "Peso total: " << weight << endl;
 
   cout << "Tamaño\ttiempo" << endl;
