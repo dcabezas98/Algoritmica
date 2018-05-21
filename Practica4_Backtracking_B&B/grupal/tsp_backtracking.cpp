@@ -13,6 +13,10 @@ void printVector(vector<int> v){
   cout << v.back() << endl;
 }
 
+void mostrarInfo(){
+  cerr << "Ejemplo: ./tsp ulysses16\n";
+}
+
 class TSP{
 
 private:
@@ -26,6 +30,12 @@ public:
   TSP(string file){
 
     ifstream f(file);
+    
+    if(!f){
+    	cerr << "Error de lectura del archivo " << file << endl;
+    	mostrarInfo();
+    	exit(-1);
+    }
     
     string trash;
     f >> trash;
@@ -135,10 +145,6 @@ void backtracking(const TSP& tsp, const vector<int> &visited, vector<int> &bestS
       backtracking(tsp, aux, bestSol, weight, minimumWeight);
     }
   }
-}
-
-void mostrarInfo(){
-  cerr << "Ejemplo: ./tsp ulysses16\n";
 }
 
 int main(int argc, char* argv[]){
