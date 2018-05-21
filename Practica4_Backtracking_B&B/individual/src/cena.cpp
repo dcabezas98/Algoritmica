@@ -120,9 +120,8 @@ void backtracking(const Cena& cena, const vector<int> &sentados, vector<int> &be
     return;
   }
 
-  if(cena.cotaAfinidad(sentados, currentAffinity) <= bestAffinity){
+  if(cena.cotaAfinidad(sentados, currentAffinity) <= bestAffinity)
      return;
-  }
 
   int aff;
   vector<int> aux;
@@ -165,7 +164,6 @@ int main(int argc, char* argv[]){
   int affinity = cena.afinidadTotal(bestSol);
   sentados.push_back(0);
   backtracking(cena, sentados, bestSol, 0, affinity);
-
 
   imprimeVector(bestSol);
   cout << "Suma de afinidades: " << affinity << endl;
