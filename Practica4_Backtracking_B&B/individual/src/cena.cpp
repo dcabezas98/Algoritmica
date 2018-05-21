@@ -73,7 +73,7 @@ public:
     assert(solution.size() == n);
     int affinity = 0;
     for(int i = 0; i < n; i++)
-      affinity += afinidad[i][(i-1+n)%n] + afinidad[i][(i+1)%n];
+      affinity += afinidad[solution(i)][solution((i-1+n)%n)] + afinidad[solution(i)][solution((i+1)%n)];
 
     return affinity;
   }
