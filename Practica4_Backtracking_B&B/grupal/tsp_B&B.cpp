@@ -29,18 +29,10 @@ struct node{
   }
 };
 
-void printSet(set<node> s){
-  set<node>::iterator it = s.begin();
-  for(it; it != s.end(); it++){
-    cout << (*it).bound << endl;
-  }
-  cout << endl;
-}
-
-int prune(set<node> &s, int minimum){
+int prune(multiset<node> &s, int minimum){
   static int pruned = 0;
-  set<node>::iterator it;
-  
+  multiset<node>::iterator it;
+
   while(!s.empty() && (*s.rbegin()).bound >= minimum){
     it = s.end();
     --it;
@@ -154,7 +146,7 @@ public:
   }
 };
 
-void BandB(const TSP& tsp, set<node> &alive_nodes, vector<int> &bestSol, int& minimumWeight, int &maxsize, int &expanded, int &pruned){
+void BandB(const TSP& tsp, multiset<node> &alive_nodes, vector<int> &bestSol, int& minimumWeight, int &maxsize, int &expanded, int &pruned){
 
   if(alive_nodes.size() > maxsize)
     maxsize = alive_nodes.size();
@@ -162,19 +154,16 @@ void BandB(const TSP& tsp, set<node> &alive_nodes, vector<int> &bestSol, int& mi
   if(alive_nodes.empty()) return;
   
   node n = *alive_nodes.begin();
-  // printVector(n.visited);
+
   alive_nodes.erase(alive_nodes.begin());
   
-  if(n.bound >= minimumWeight){
-    cout << "Poda " << n.bound << endl;
-    printSet(alive_nodes);
-    cout << endl;
+  if(n.bound >= minimumWeight)
     return;
-  }
 
   if(n.visited.size() == tsp.getN()){
-    cout << "Solución" << endl;
+ 
     n.currentWeight += tsp.getDistance(n.visited.front(), n.visited.back());
+
     if(n.currentWeight < minimumWeight){
       minimumWeight = n.currentWeight;
       bestSol = n.visited;
@@ -232,7 +221,7 @@ int main(int argc, char* argv[]){
 
   node nod = {visited, 0, 0};
 
-  set<node> alive;
+  multiset<node> alive;
   alive.insert(nod);
 
   int maxsize = 0, expanded = 0, pruned = 0;
