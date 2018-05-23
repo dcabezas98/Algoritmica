@@ -60,15 +60,15 @@
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \author{David Cabezas Berrido \\ Patricia Córdoba Hidalgo \\ Emilio José Hoyo Medina \\ Inmaculada Marín Carballo}
-\date{\vspace{-5mm} \today}
+\date{\vspace{1mm} \today}
 
-\title{\huge Algoritmo Backtracking: Viajante de Comercio \HRule\vspace{-4mm} }
+\title{\huge Algoritmos Backtracking y B\&B: \\Viajante de Comercio \HRule\vspace{-4mm} }
 
 \setcounter{section}{-1}
 
 \begin{document}
 \maketitle
-\vspace{20mm}
+\vspace{5mm}
 \tableofcontents
 \newpage
 
@@ -227,6 +227,10 @@ Donde los datos de entrada son:
 
 \section{Branch and Bound}
 
+Ahora resolveremos el problema con un algoritmo de \textbf{Branch and Bound}. La diferencia con Backtracking es que en este último se hace en
+profundidad. Empiezo por un nodo y sigo para abajo. Cuando termino un recorrido es porque, o bien he obtenido una solución, o bien he tenido que podar la rama. Siempre que cojo un nodo expando sólo uno.
+Sin embargo en Branch and Bound cuando expando un nodo, expando a la vez todos sus hijos. De entre todos los nodos vivos, me quedo con el que tenga la estimación más prometedora, y expando todos los hijos de este. En función de la estimación voy expandiendo los nodos.
+
 \subsection{Código}
 
 \begin{lstlisting}
@@ -340,124 +344,243 @@ Los recorridos dados por los algoritmos son:
 \subsection{a4}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 7
+\item Podas: 2
+\item Nº máximo de nodos vivos simultáneamente: 4 
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 55]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/a4}}
-  \subfigure[Backtracking. Peso = 55]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/a4}}
-  \subfigure[Branch and Bound. Peso = 55]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/a4}}
+  \subfigure[Greedy. Peso = 55]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/a4}}
+  \subfigure[Backtracking. Peso = 55]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/a4}}
+  \subfigure[Branch and Bound. Peso = 55]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/a4}}
 \end{figure}
+
+\newpage
 
 \subsection{att5}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 23
+\item Podas: 12
+\item Nº máximo de nodos vivos simultáneamente: 15
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 10060]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/att5}}
-\subfigure[Backtracking. Peso = 10060]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/att5}}
-\subfigure[Branch and Bound. Peso = 10060]{\label{graf:pr1002_...}\includegraphics[width=55mm]{graficas/B&B/att5}}
+  \subfigure[Greedy. Peso = 10060]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/att5}}
+\subfigure[Backtracking. Peso = 10060]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/att5}}
+\subfigure[Branch and Bound. Peso = 10060]{\label{graf:pr1002_...}\includegraphics[width=70mm]{graficas/B&B/att5}}
 \end{figure}
+
+\newpage
 
 \subsection{bayg6}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 77
+\item Podas: 78
+\item Nº máximo de nodos vivos simultáneamente: 60
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 4244]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/bayg6}}
-  \subfigure[Backtracking. Peso = 4244]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/bayg6}}
-  \subfigure[Branch and Bound. Peso = 4244]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/bayg6}}
+  \subfigure[Greedy. Peso = 4244]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/bayg6}}
+  \subfigure[Backtracking. Peso = 4244]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/bayg6}}
+  \subfigure[Branch and Bound. Peso = 4244]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/bayg6}}
 \end{figure}
+
+\newpage
 
 \subsection{berlin7}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 233
+\item Podas: 269
+\item Nº máximo de nodos vivos simultáneamente: 249
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 2218]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/berlin7}}
-  \subfigure[Backtracking. Peso = 2218]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/berlin7}}
-  \subfigure[Branch and Bound. Peso = 2218]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/berlin7}}
+  \subfigure[Greedy. Peso = 2218]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/berlin7}}
+  \subfigure[Backtracking. Peso = 2218]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/berlin7}}
+  \subfigure[Branch and Bound. Peso = 2218]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/berlin7}}
 \end{figure}
+
+\newpage
 
 \subsection{eil8}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 189
+\item Podas: 410
+\item Nº máximo de nodos vivos simultáneamente: 316
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 166]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/eil8}}
-  \subfigure[Backtracking. Peso = 166]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/eil8}}
-  \subfigure[Branch and Bound. Peso = 166]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/eil8}}
+  \subfigure[Greedy. Peso = 166]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/eil8}}
+  \subfigure[Backtracking. Peso = 166]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/eil8}}
+  \subfigure[Branch and Bound. Peso = 166]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/eil8}}
 \end{figure}
+
+\newpage
 
 \subsection{eil9}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 367
+\item Podas: 784
+\item Nº máximo de nodos vivos simultáneamente: 375
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 151]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/eil9}}
-  \subfigure[Backtracking. Peso = 151]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/eil9}}
-  \subfigure[Branch and Bound. Peso = 151]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/eil9}}
+  \subfigure[Greedy. Peso = 151]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/eil9}}
+  \subfigure[Backtracking. Peso = 151]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/eil9}}
+  \subfigure[Branch and Bound. Peso = 151]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/eil9}}
 \end{figure}
+
+\newpage
 
 \subsection{gr10}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 69972
+\item Podas: 74072
+\item Nº máximo de nodos vivos simultáneamente: 70629
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 129]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/gr10}}
-  \subfigure[Backtracking. Peso = 129]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/gr10}}
-  \subfigure[Branch and Bound. Peso = 129]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/gr10}}
+  \subfigure[Greedy. Peso = 129]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/gr10}}
+  \subfigure[Backtracking. Peso = 129]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/gr10}}
+  \subfigure[Branch and Bound. Peso = 129]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/gr10}}
 \end{figure}
+
+\newpage
 
 \subsection{gr11}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 121162
+\item Podas: 245564
+\item Nº máximo de nodos vivos simultáneamente: 162699
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 92]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/gr11}}
-  \subfigure[Backtracking. Peso = 92]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/gr11}}
-  \subfigure[Branch and Bound. Peso = 92]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/gr11}}
+  \subfigure[Greedy. Peso = 99]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/gr11}}
+  \subfigure[Backtracking. Peso = 92]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/gr11}}
+  \subfigure[Branch and Bound. Peso = 92]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/gr11}}
 \end{figure}
+
+\newpage
 
 \subsection{kroD12}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 32017
+\item Podas: 103296
+\item Nº máximo de nodos vivos simultáneamente: 79572
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 10047]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/kroD12}}
-  \subfigure[Backtracking. Peso = 10047]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/kroD12}}
-  \subfigure[Branch and Bound. Peso = 10047]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/kroD12}}
+  \subfigure[Greedy. Peso = 10656]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/kroD12}}
+  \subfigure[Backtracking. Peso = 10047]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/kroD12}}
+  \subfigure[Branch and Bound. Peso = 10047]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/kroD12}}
 \end{figure}
+
+\newpage
 
 \subsection{pcb13}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 2197231
+\item Podas: 5630312
+\item Nº máximo de nodos vivos simultáneamente: 5630313
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 8351]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/pcb13}}
-  \subfigure[Backtracking. Peso = 8351]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pcb13}}
-  \subfigure[Brach and Bound. Peso = 8351]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pcb13}}
+  \subfigure[Greedy. Peso = 8351]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/pcb13}}
+  \subfigure[Backtracking. Peso = 8351]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/pcb13}}
+  \subfigure[Brach and Bound. Peso = 8351]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/pcb13}}
 \end{figure}
+
+\newpage
 
 \subsection{pr14}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 80852
+\item Podas: 317840
+\item Nº máximo de nodos vivos simultáneamente: 315823
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 3565]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/pr14}}
-  \subfigure[Backtracking. Peso = 3565]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pr14}}
-  \subfigure[Branch and Bound. Peso = 3565]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pr14}}
+  \subfigure[Greedy. Peso = 3565]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/pr14}}
+  \subfigure[Backtracking. Peso = 3565]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/pr14}}
+  \subfigure[Branch and Bound. Peso = 3565]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/pr14}}
 \end{figure}
+
+\newpage
 
 \subsection{pr15}
 \setcounter{subfigure}{0}
 
+Branch and Bound:
+\begin{itemize}
+\item Nodos expandidos: 131533
+\item Podas: 547585
+\item Nº máximo de nodos vivos simultáneamente: 546530
+\end{itemize}
+
 \begin{figure}[H]
   \centering
-  \subfigure[Greedy. Peso = 3579]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/pr15}}
-  \subfigure[Backtracking. Peso = 3579]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pr15}}
-  \subfigure[Branch and Bound. Peso = 3579]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pr15}}
+  \subfigure[Greedy. Peso = 3653]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Greedy/pr15}}
+  \subfigure[Backtracking. Peso = 3579]{\label{graf:a4}\includegraphics[width=70mm]{graficas/Backtracking/pr15}}
+  \subfigure[Branch and Bound. Peso = 3579]{\label{graf:a4}\includegraphics[width=70mm]{graficas/B&B/pr15}}
 \end{figure}
 
 \section{Conclusión}
-Tras probar con los mismos datos tres algoritmos diferentes: Greedy, Bactracking y Branch and Bound, podemos llegar a ciertas conclusiones. Observamos que la ejecución más rápida se da con Greedy pero este no nos proporciona la respuesta óptima a nuestro problema. Solo Backtracking y Branch and Bound llegan al camino hamiltoniano deseado y si comparamos estos dos, B\&B llega a esta solución antes que Backtracking. Gracias a estas práctica hemos aprendido a realizar nuestros propios algoritmos siguiendo las pautas dadas en clase y a comparar la eficiencia de estos.
+
+Tras probar con los mismos datos tres algoritmos diferentes: Greedy,
+Bactracking y Branch and Bound, podemos llegar a ciertas
+conclusiones. Observamos que la ejecución más rápida se da con Greedy
+y en la mayor parte de los casos encuentra la solución óptima al igual
+que Backtracking y Branch and Bound. Con Backtracking y Branch and
+Bound nos aseguramos llegar al camino hamiltoniano deseado (la
+solución óptima) a cambio de una gran pérdida en eficiencia. Si
+comparamos estos dos, B\&B llega a esta solución después que
+Backtracking. Gracias a estas práctica hemos aprendido a realizar
+nuestros propios algoritmos siguiendo las pautas dadas en clase y a
+comparar la eficiencia de estos. Además hemos podido ver como en
+ocasiones es preferible obtener una aproximación y no la solución
+óptima a cambio de una mejora considerable en el tiempo de ejecución.
 
 \end{document}
