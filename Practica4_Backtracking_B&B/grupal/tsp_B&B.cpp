@@ -206,7 +206,7 @@ int main(int argc, char* argv[]){
   string nombre_salida(argv[1]);
 
   nombre_entrada="datosTSP/" + nombre_entrada + ".tsp";
-  nombre_salida="salidas/" + nombre_salida + "_solved.tsp";
+  nombre_salida="salidas/B&B/" + nombre_salida + "_solved.tsp";
 
   TSP tsp(nombre_entrada);
 

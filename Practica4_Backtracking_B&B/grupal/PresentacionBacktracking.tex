@@ -1,0 +1,203 @@
+\documentclass[serif,9pt]{beamer}
+\usetheme{Boadilla}
+\usepackage{color}
+\definecolor{moradoInma}{rgb}{0.5,0,0.7}
+\usecolortheme[named=moradoInma]{structure}
+
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{caption}
+\usepackage{graphicx} % figuras
+\usepackage{subfigure} % subfiguras
+\usepackage{float}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\usepackage{listings}
+\lstset
+{ %Formatting for code in appendix
+  language=C++, % choose the language of the code
+  basicstyle=\footnotesize\color{black},
+  keywordstyle=\color{moradoInma}\bfseries, % style for keywords
+  numberstyle=\tiny, % the size of the fonts that are used for the line-numbers     
+  backgroundcolor=\color{white},
+  showspaces=false, % show spaces adding particular underscores
+  showstringspaces=false, % underline spaces within strings
+  showtabs=false, % show tabs within strings adding particular underscores
+  tabsize=2, % sets default tabsize to 2 spaces
+  captionpos=b, % sets the caption-position to bottom
+  breaklines=false, % sets automatic line breaking
+  breakatwhitespace=false, 
+}
+
+\restylefloat{figure}
+
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+
+\begin{document}
+
+\title{Algoritmo Backtracking: Viajante de Comercio}  
+\author{David Cabezas Berrido \\ Patricia Córdoba Hidalgo \\ Emilio José Hoyo Medina \\ Inmaculada Marín Carballo}
+\date{\today}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Contenido}
+\tableofcontents
+\end{frame} 
+
+\section{Problema} 
+
+\subsection{Viajante de Comercio}
+
+\begin{frame}[fragile]\frametitle{Viajante de Comercio} 
+El problema del viajante de comercio (TSP, por Traveling Salesman Problem): dado un conjunto de ciudades y una matriz con las distancias entre todas ellas, un viajante debe recorrer todas las ciudades exactamente una vez, regresando al punto de partida, de forma tal que la distancia recorrida sea mínima.
+\end{frame}
+
+\section{Clase TSP}
+\begin{frame}[fragile]\frametitle{Clase TSP}
+\begin{lstlisting}
+class TSP{
+private:
+  int n;
+  vector<vector<int>> map;
+public:
+  vector<double> xCords, yCords;
+
+  //Constructor
+  TSP(string file){...}
+
+  int getN() const{...}
+
+  //Imprime el mapa
+  void printMap() const{}
+
+  //Distancia entre dos ciudades i y j
+  int getDistance(int i, int j) const{...}
+
+  //Peso total
+  int totalWeight(vector<int> solution) const{...}
+
+  // Devuelve la distancia de city a su ciudad más cercana
+  int bestDistance(int city) const{...}
+
+  //Cota mínimo del árbol de soluciones
+  int weightBound(const vector<int> &visited, int currentWeight)const{...}
+};
+\end{lstlisting}
+
+\end{frame}
+
+  \section{Backtracking}
+
+  \begin{frame}[fragile]\frametitle{Backtracking} 
+    \begin{lstlisting}
+void backtracking(const TSP& tsp, const vector<int> &visited,
+      vector<int> &bestSol, int currentWeight, int& minimumWeight){
+
+  if(visited.size() == tsp.getN()){
+    currentWeight += tsp.getDistance(visited.back(),visited.front());
+    if(currentWeight < minimumWeight){
+      minimumWeight = currentWeight;
+      bestSol = visited;
+    }
+    return;
+  }
+
+  if(tsp.weightBound(visited, currentWeight) >= minimumWeight)
+    return;
+
+  int weight;
+  vector<int> aux;
+
+  for(int i = 1; i < tsp.getN(); i++){
+    weight = currentWeight;
+    aux = visited;
+    if(find(visited.begin(),visited.end(),i)==visited.end()){
+      aux.push_back(i);
+      weight += tsp.getDistance(i,visited.back());
+      backtracking(tsp, aux, bestSol, weight, minimumWeight);
+    }
+  }
+}
+\end{lstlisting}    
+\end{frame}
+
+\section{Branch and Bound}
+
+\begin{frame}[fragile]\frametitle{Branch and Bound}
+
+  \begin{lstlisting}
+  void hacer(){}
+
+\end{lstlisting}
+
+\end{frame}
+
+
+\section{Eficiencia}
+\begin{frame}\frametitle{Eficiencia Bactracking}
+\begin{figure}[H]
+  \centering \subfigure[Eficiencia empírica]{\includegraphics[width=70mm]{empirica.png}}
+\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Eficiencia Bactracking}
+\begin{figure}[H]
+  \centering \subfigure[Eficiencia empírica]{\includegraphics[width=70mm]{empirica.png}}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}\frametitle{Eficiencia Comparativa}
+  
+  \begin{figure}[H]
+  \centering \subfigure[Eficiencia empírica]{\includegraphics[width=70mm]{empirica.png}}
+\end{figure}
+\end{frame}
+
+\section{Resultados Empíricos}
+
+\begin{frame}\frametitle{Comparativa}
+  \begin{table}[!hbp]
+    \centering
+    \label{tab:tiempos}
+    \begin{tabular}{| c | c | c | c |}
+      \hline
+      \multicolumn{1}{|c|}{$\textbf{n}$}& \textbf{Backtracking}&\textbf{Branch and Bound}& \textbf{Greedy} \\ \hline
+      4 & 5.7e-05   & 1.49e-05  & 6e-06     \\ 
+      5 & 0.000229  & 6.38e-05  & 1.2e-05   \\ 
+      6 & 0.000943  & 0.0003573 & 1.8e-05   \\ 
+      7 & 0.002449  & 0.0020342 & 2.7e-05   \\ 
+      8 & 0.001312  & 0.014561  & 3.5e-05   \\ 
+      9 & 0.005933  & 0.128955  & 5e-05     \\ 
+      10 & 0.350949  & 1.27693   & 6.7e-05   \\ 
+      11 & 0.974521  & 13.8355   & 8.8e-05   \\ 
+      12 & 0.457285  & 165.75    & 0.000106  \\
+      13 & 29.5652   & 2.28e-05  & 0.000131  \\
+      14 & 251.917   & 2.28e-05  & 0.000166  \\
+      15 & 3.14079   & 2.28e-05  & 0.000202  \\ \hline
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+
+\section{Conclusión}
+
+\begin{frame}
+  \huge CONCLUSIÓN \\
+
+  \begin{enumerate}
+  \item Greedy: el más rápido / resultado incorrecto
+  \item Backtracking: lento / resultado correcto
+  \item Branch \& Bound: rápido / resultado correcto
+    \end{enumerate}
+\end{frame}
+
+
+\end{document}
