@@ -310,19 +310,28 @@ Hemos adaptado nuestra selección de tamaños para que fueran fáciles de utiliz
     \hline
     \multicolumn{1}{|c|}{$\textbf{n}$}& \textbf{Backtracking}&
     \textbf{Branch and Bound}& \textbf{Greedy} \\ \hline
-     4 & 5.7e-05   & 1.49e-05  & 6e-06     \\ 
-     5 & 0.000229  & 6.38e-05  & 1.2e-05   \\ 
-     6 & 0.000943  & 0.0003573 & 1.8e-05   \\ 
-     7 & 0.002449  & 0.0020342 & 2.7e-05   \\ 
-     8 & 0.001312  & 0.014561  & 3.5e-05   \\ 
-     9 & 0.005933  & 0.128955  & 5e-05     \\ 
-    10 & 0.350949  & 1.27693   & 6.7e-05   \\ 
-    11 & 0.974521  & 13.8355   & 8.8e-05   \\ 
-    12 & 0.457285  & 165.75    & 0.000106  \\
-    13 & 1.17463   & 2.28e-05  & 0.000131  \\
-    14 & 1.52913   & 2.28e-05  & 0.000166  \\
-    15 & 3.14079   & 2.28e-05  & 0.000202  \\ \hline
+     4 & 6e-06	   & 5.7e-05  & 0.00010  \\ 
+     5 & 1.2e-05   & 0.00022  & 0.00040  \\ 
+     6 & 1.8e-05   & 0.00094  & 0.00183  \\ 
+     7 & 2.7e-05   & 0.00244  & 0.00423  \\ 
+     8 & 3.5e-05   & 0.00131  & 0.00278  \\ 
+     9 & 5e-05	   & 0.00593  & 0.00623  \\ 
+    10 & 6.7e-05   & 0.35094  & 0.09896  \\ 
+    11 & 8.8e-05   & 0.41862  & 0.98615  \\ 
+    12 & 0.000106  & 0.60728  & 1.76516  \\
+    13 & 0.000131  & 1.17463  & 2.64651  \\
+    14 & 0.000166  & 1.52913  & 3.60603  \\
+    15 & 0.000202  & 3.14079  & 6.45577  \\ \hline
   \end{tabular}
+\end{figure}
+
+\subsection{Gráficas}
+
+\begin{figure}[H]
+  \centering
+  \subfigure[Backtracking]{\label{graf:a4}\includegraphics[width=65mm]{graficas/tiempos/backtracking}}
+  \subfigure[Branch and Bound]{\label{graf:a4}\includegraphics[width=65mm]{graficas/tiempos/B&B}}
+  \subfigure[Branch and Bound]{\label{graf:a4}\includegraphics[width=80mm]{graficas/tiempos/comparacion}}
 \end{figure}
 
 \section{Recorridos}
@@ -333,10 +342,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/a4}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/a4}}
+  \subfigure[Greedy. Peso = 55]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/a4}}
+  \subfigure[Backtracking. Peso = 55]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/a4}}
+  \subfigure[Branch and Bound. Peso = 55]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/a4}}
 \end{figure}
 
 \subsection{att5}
@@ -344,10 +352,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-\subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/attr5}}
-\subfigure[Branch and Bound. Peso = 385020]{\label{graf:pr1002_...}\includegraphics[width=55mm]{graficas/B&B/att5}}
+  \subfigure[Greedy. Peso = 10060]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/att5}}
+\subfigure[Backtracking. Peso = 10060]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/att5}}
+\subfigure[Branch and Bound. Peso = 10060]{\label{graf:pr1002_...}\includegraphics[width=55mm]{graficas/B&B/att5}}
 \end{figure}
 
 \subsection{bayg6}
@@ -355,10 +362,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/bayg6}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/bayg6}}
+  \subfigure[Greedy. Peso = 4244]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/bayg6}}
+  \subfigure[Backtracking. Peso = 4244]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/bayg6}}
+  \subfigure[Branch and Bound. Peso = 4244]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/bayg6}}
 \end{figure}
 
 \subsection{berlin7}
@@ -366,10 +372,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/berlin7}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/berlin7}}
+  \subfigure[Greedy. Peso = 2218]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/berlin7}}
+  \subfigure[Backtracking. Peso = 2218]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/berlin7}}
+  \subfigure[Branch and Bound. Peso = 2218]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/berlin7}}
 \end{figure}
 
 \subsection{eil8}
@@ -377,10 +382,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/eil8}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/eil8}}
+  \subfigure[Greedy. Peso = 166]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/eil8}}
+  \subfigure[Backtracking. Peso = 166]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/eil8}}
+  \subfigure[Branch and Bound. Peso = 166]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/eil8}}
 \end{figure}
 
 \subsection{eil9}
@@ -388,10 +392,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/eil9}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/eil9}}
+  \subfigure[Greedy. Peso = 151]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/eil9}}
+  \subfigure[Backtracking. Peso = 151]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/eil9}}
+  \subfigure[Branch and Bound. Peso = 151]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/eil9}}
 \end{figure}
 
 \subsection{gr10}
@@ -399,10 +402,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/gr10}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/gr10}}
+  \subfigure[Greedy. Peso = 129]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/gr10}}
+  \subfigure[Backtracking. Peso = 129]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/gr10}}
+  \subfigure[Branch and Bound. Peso = 129]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/gr10}}
 \end{figure}
 
 \subsection{gr11}
@@ -410,10 +412,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/gr11}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/gr11}}
+  \subfigure[Greedy. Peso = 92]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/gr11}}
+  \subfigure[Backtracking. Peso = 92]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/gr11}}
+  \subfigure[Branch and Bound. Peso = 92]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/gr11}}
 \end{figure}
 
 \subsection{kroD12}
@@ -421,10 +422,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/kroD12}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/kroD12}}
+  \subfigure[Greedy. Peso = 10047]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/kroD12}}
+  \subfigure[Backtracking. Peso = 10047]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/kroD12}}
+  \subfigure[Branch and Bound. Peso = 10047]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/kroD12}}
 \end{figure}
 
 \subsection{pcb13}
@@ -432,10 +432,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pcb13}}
-  \subfigure[Brach and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pcb13}}
+  \subfigure[Greedy. Peso = 8351]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/pcb13}}
+  \subfigure[Backtracking. Peso = 8351]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pcb13}}
+  \subfigure[Brach and Bound. Peso = 8351]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pcb13}}
 \end{figure}
 
 \subsection{pr14}
@@ -443,10 +442,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pr14}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pr14}}
+  \subfigure[Greedy. Peso = 3565]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/pr14}}
+  \subfigure[Backtracking. Peso = 3565]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pr14}}
+  \subfigure[Branch and Bound. Peso = 3565]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pr14}}
 \end{figure}
 
 \subsection{pr15}
@@ -454,10 +452,9 @@ Los recorridos dados por los algoritmos son:
 
 \begin{figure}[H]
   \centering
-%\subfigure[]{\label{graf:pr1002}\includegraphics[width=55mm]{graficas/pr1002}}
-%\subfigure[Greegy. Peso = 331103]{\label{graf:pr1002_nearest}\includegraphics[width=55mm]{graficas/pr1002_nearest}}
-  \subfigure[Backtracking. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pr15}}
-  \subfigure[Branch and Bound. Peso = ]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pr15}}
+  \subfigure[Greedy. Peso = 3579]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Greedy/pr15}}
+  \subfigure[Backtracking. Peso = 3579]{\label{graf:a4}\includegraphics[width=55mm]{graficas/Backtracking/pr15}}
+  \subfigure[Branch and Bound. Peso = 3579]{\label{graf:a4}\includegraphics[width=55mm]{graficas/B&B/pr15}}
 \end{figure}
 
 \section{Conclusión}
