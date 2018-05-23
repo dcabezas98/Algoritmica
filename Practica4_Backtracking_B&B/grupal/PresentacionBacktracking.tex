@@ -56,44 +56,32 @@
 \subsection{Viajante de Comercio}
 
 \begin{frame}[fragile]\frametitle{Viajante de Comercio} 
-El problema del viajante de comercio (TSP, por Traveling Salesman Problem): dado un conjunto de ciudades y una matriz con las distancias entre todas ellas, un viajante debe recorrer todas las ciudades exactamente una vez, regresando al punto de partida, de forma tal que la distancia recorrida sea mínima.
+  El problema del viajante de comercio (TSP, por Traveling Salesman
+  Problem): dado un conjunto de ciudades y una matriz con las
+  distancias entre todas ellas, un viajante debe recorrer todas las
+  ciudades exactamente una vez, regresando al punto de partida, de
+  forma tal que la distancia recorrida sea mínima.
 \end{frame}
 
-\section{Clase TSP}
-\begin{frame}[fragile]\frametitle{Clase TSP}
-\begin{lstlisting}
-class TSP{
-private:
-  int n;
-  vector<vector<int>> map;
-public:
-  vector<double> xCords, yCords;
+\section{Algoritmos}
 
-  //Constructor
-  TSP(string file){...}
+\begin{frame}[fragile]{Función cota}
+  \begin{lstlisting}
+  int weightBound(const vector<int> &visited, int currentWeight) const{
+    int bound = currentWeight;
 
-  int getN() const{...}
+    for(int i = 1; i < n; i++)
+      if(find(visited.begin(),visited.end(),i)==visited.end())
+        bound += bestDistance(i);
 
-  //Imprime el mapa
-  void printMap() const{}
+    bound += bestDistance(visited.front());
 
-  //Distancia entre dos ciudades i y j
-  int getDistance(int i, int j) const{...}
-
-  //Peso total
-  int totalWeight(vector<int> solution) const{...}
-
-  // Devuelve la distancia de city a su ciudad más cercana
-  int bestDistance(int city) const{...}
-
-  //Cota mínimo del árbol de soluciones
-  int weightBound(const vector<int> &visited, int currentWeight)const{...}
-};
-\end{lstlisting}
-
+    return bound;
+  }
+  \end{lstlisting}
 \end{frame}
 
-  \section{Backtracking}
+  \subsection{Backtracking}
 
   \begin{frame}[fragile]\frametitle{Backtracking} 
     \begin{lstlisting}
@@ -128,40 +116,74 @@ void backtracking(const TSP& tsp, const vector<int> &visited,
 \end{lstlisting}    
 \end{frame}
 
-\section{Branch and Bound}
+\subsection{Branch and Bound}
 
 \begin{frame}[fragile]\frametitle{Branch and Bound}
 
-  \begin{lstlisting}
-  void hacer(){}
+\begin{lstlisting}[basicstyle=\tiny]
+  void BandB(const TSP& tsp, multiset<node> &alive_nodes, vector<int> &bestSol,
+  int& minimumWeight, int &maxsize, int &expanded, int &pruned){
 
+  if(alive_nodes.empty()) return;
+  
+  node n = *alive_nodes.begin();
+  alive_nodes.erase(alive_nodes.begin());
+  
+  if(n.bound >= minimumWeight) return;
+
+  if(n.visited.size() == tsp.getN()){
+ 
+    n.currentWeight += tsp.getDistance(n.visited.front(), n.visited.back());
+
+    if(n.currentWeight < minimumWeight){
+      minimumWeight = n.currentWeight;
+      bestSol = n.visited;
+      pruned = prune(alive_nodes,minimumWeight);
+    }
+    BandB(tsp, alive_nodes, bestSol, minimumWeight, maxsize, expanded, pruned);
+  }
+  else { 
+    node aux;
+  
+    for(int i = 1; i < tsp.getN(); i++){
+      if(find(n.visited.begin(), n.visited.end(), i) == n.visited.end()){
+        aux = n;
+        aux.visited.push_back(i);
+        aux.currentWeight += tsp.getDistance(i, n.visited.back());
+        tsp.weightBound(aux.visited, aux.currentWeight);
+        alive_nodes.insert(aux);
+      }
+    }
+
+    BandB(tsp, alive_nodes, bestSol, minimumWeight, maxsize, expanded, pruned);
+  }
+}
 \end{lstlisting}
 
 \end{frame}
 
-
-\section{Eficiencia}
-\begin{frame}\frametitle{Eficiencia Bactracking}
+\section{Resultados empíricos}
+\subsection{Eficiencia empírica}
+\begin{frame}\frametitle{Eficiencia Backtracking}
 \begin{figure}[H]
-  \centering \subfigure[Eficiencia empírica]{\includegraphics[width=70mm]{empirica.png}}
+  \centering \subfigure{\includegraphics[width=70mm]{graficas/tiempos/backtracking}}
 \end{figure}
 \end{frame}
 
-\begin{frame}\frametitle{Eficiencia Bactracking}
+\begin{frame}\frametitle{Eficiencia B\&B}
 \begin{figure}[H]
-  \centering \subfigure[Eficiencia empírica]{\includegraphics[width=70mm]{empirica.png}}
+  \centering \subfigure{\includegraphics[width=70mm]{graficas/tiempos/B&B}}
 \end{figure}
 \end{frame}
 
-
-\begin{frame}\frametitle{Eficiencia Comparativa}
+\begin{frame}\frametitle{Comparación}
   
   \begin{figure}[H]
-  \centering \subfigure[Eficiencia empírica]{\includegraphics[width=70mm]{empirica.png}}
+  \centering \subfigure{\includegraphics[width=70mm]{graficas/tiempos/comparacion}}
 \end{figure}
 \end{frame}
 
-\section{Resultados Empíricos}
+\subsection{Comparativa}
 
 \begin{frame}\frametitle{Comparativa}
   \begin{table}[!hbp]
@@ -170,22 +192,21 @@ void backtracking(const TSP& tsp, const vector<int> &visited,
     \begin{tabular}{| c | c | c | c |}
       \hline
       \multicolumn{1}{|c|}{$\textbf{n}$}& \textbf{Backtracking}&\textbf{Branch and Bound}& \textbf{Greedy} \\ \hline
-      4 & 5.7e-05   & 1.49e-05  & 6e-06     \\ 
-      5 & 0.000229  & 6.38e-05  & 1.2e-05   \\ 
-      6 & 0.000943  & 0.0003573 & 1.8e-05   \\ 
-      7 & 0.002449  & 0.0020342 & 2.7e-05   \\ 
-      8 & 0.001312  & 0.014561  & 3.5e-05   \\ 
-      9 & 0.005933  & 0.128955  & 5e-05     \\ 
-      10 & 0.350949  & 1.27693   & 6.7e-05   \\ 
-      11 & 0.974521  & 13.8355   & 8.8e-05   \\ 
-      12 & 0.457285  & 165.75    & 0.000106  \\
-      13 & 29.5652   & 2.28e-05  & 0.000131  \\
-      14 & 251.917   & 2.28e-05  & 0.000166  \\
-      15 & 3.14079   & 2.28e-05  & 0.000202  \\ \hline
+      4 & 5.7e-05    & 0.000104  & 6e-06     \\ 
+      5 & 0.000229   & 0.000401  & 1.2e-05   \\ 
+      6 & 0.000943   & 0.001835 & 1.8e-05   \\ 
+      7 & 0.002449   & 0.004233 & 2.7e-05   \\ 
+      8 & 0.001312   & 0.002789  & 3.5e-05   \\ 
+      9 & 0.005933   & 0.006234  & 5e-05     \\ 
+      10 & 0.350949  & 0.09896   & 6.7e-05   \\ 
+      11 & 0.554521  & 0.98615   & 8.8e-05   \\ 
+      12 & 0.857285  & 1.76516   & 0.000106  \\
+      13 & 1.17463   & 2.64651  & 0.000131  \\
+      14 & 1.52913   & 3.60603  & 0.000166  \\
+      15 & 3.14079   & 6.45577   & 0.000202  \\ \hline
     \end{tabular}
   \end{table}
 \end{frame}
-
 
 \section{Conclusión}
 
@@ -193,9 +214,9 @@ void backtracking(const TSP& tsp, const vector<int> &visited,
   \huge CONCLUSIÓN \\
 
   \begin{enumerate}
-  \item Greedy: el más rápido / resultado incorrecto
-  \item Backtracking: lento / resultado correcto
-  \item Branch \& Bound: rápido / resultado correcto
+  \item Greedy: el más rápido / solución aproximada
+  \item Backtracking: lento / solución óptima
+  \item Branch \& Bound: lento / solución óptima
     \end{enumerate}
 \end{frame}
 
