@@ -1,3 +1,7 @@
+// Requiere
+// ulimit -s unlimited
+// para funcionar
+
 #include <iostream>
 using namespace std;
 #include <vector>
