@@ -32,9 +32,9 @@ public:
     ifstream f(file);
     
     if(!f){
-    	cerr << "Error de lectura del archivo " << file << endl;
-    	mostrarInfo();
-    	exit(-1);
+      cerr << "Error de lectura del archivo " << file << endl;
+      mostrarInfo();
+      exit(-1);
     }
     
     string trash;
@@ -82,7 +82,7 @@ public:
   }
 
   int getDistance(int i, int j) const{
-    if(0 <= i && i < n && 0 <= j && j < n && i!=j)
+    if(0 <= i && i < n && 0 <= j && j < n && i != j)
       return map[max(i,j)][min(i,j)];
 
     return INT_MAX; // Para evitar considerar la distancia de una ciudad a sí misma

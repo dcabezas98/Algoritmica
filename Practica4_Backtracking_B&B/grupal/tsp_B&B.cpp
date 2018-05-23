@@ -6,12 +6,16 @@ using namespace std;
 #include <algorithm>
 #include <fstream>
 #include <climits>
-#include <queue>
+#include <set>
 
 void printVector(vector<int> v){
   for(int i = 0; i < v.size()-1; i++)
     cout << v[i] << ", ";
   cout << v.back() << endl;
+}
+
+void mostrarInfo(){
+  cerr << "Ejemplo: ./tsp ulysses16\n";
 }
 
 struct node{
@@ -20,11 +24,32 @@ struct node{
   int currentWeight;
 
   bool operator<(node other) const
-    {
-        return bound > other.bound;
-    }
+  {
+    return bound < other.bound;
+  }
 };
+
+void printSet(set<node> s){
+  set<node>::iterator it = s.begin();
+  for(it; it != s.end(); it++){
+    cout << (*it).bound << endl;
+  }
+  cout << endl;
+}
+
+int prune(set<node> &s, int minimum){
+  static int pruned = 0;
+  set<node>::iterator it;
   
+  while(!s.empty() && (*s.rbegin()).bound >= minimum){
+    it = s.end();
+    --it;
+    s.erase(it);
+    pruned++;
+  }
+  return pruned;
+}
+
 class TSP{
 
 private:
@@ -38,6 +63,12 @@ public:
   TSP(string file){
 
     ifstream f(file);
+
+    if(!f){
+      cerr << "Error de lectura del archivo " << file << endl;
+      mostrarInfo();
+      exit(-1);
+    }
     
     string trash;
     f >> trash;
@@ -87,7 +118,6 @@ public:
     if(0 <= i && i < n && 0 <= j && j < n && i != j)
       return map[max(i,j)][min(i,j)];
 
-    cout << "INT_MAX" << INT_MAX << endl;
     return INT_MAX; // Para evitar considerar la distancia de una ciudad a sí misma
   }
 
@@ -105,12 +135,9 @@ public:
     int minD = getDistance(city,0);
     
     for(int j = 1; j < n; j++)
-      if(getDistance(city,j) < minD){
-	minD = getDistance(city,j);
-	if (minD==0) cout << "Ciudades " << city << "  " << j << endl; 
-      }
+      if(getDistance(city,j) < minD)
+	minD = getDistance(city,j); 
 
-    cout << "BestDistance " << minD << endl;
     return minD;
   }
 
@@ -127,19 +154,21 @@ public:
   }
 };
 
-void BandB(const TSP& tsp, priority_queue<node> &alive_nodes, vector<int> &bestSol, int& minimumWeight, int &maxsize, int &expanded){
-  
+void BandB(const TSP& tsp, set<node> &alive_nodes, vector<int> &bestSol, int& minimumWeight, int &maxsize, int &expanded, int &pruned){
+
   if(alive_nodes.size() > maxsize)
     maxsize = alive_nodes.size();
-  
-  node n = alive_nodes.top();
-  printVector(n.visited);
-  alive_nodes.pop();
 
-  cout << "Min weight: " << minimumWeight << endl;
-  cout << "Bound " << n.bound << endl;
+  if(alive_nodes.empty()) return;
+  
+  node n = *alive_nodes.begin();
+  // printVector(n.visited);
+  alive_nodes.erase(alive_nodes.begin());
+  
   if(n.bound >= minimumWeight){
-    cout << "Poda" << endl;
+    cout << "Poda " << n.bound << endl;
+    printSet(alive_nodes);
+    cout << endl;
     return;
   }
 
@@ -149,29 +178,27 @@ void BandB(const TSP& tsp, priority_queue<node> &alive_nodes, vector<int> &bestS
     if(n.currentWeight < minimumWeight){
       minimumWeight = n.currentWeight;
       bestSol = n.visited;
+      pruned = prune(alive_nodes,minimumWeight);
     }
-    return;
+    BandB(tsp, alive_nodes, bestSol, minimumWeight, maxsize, expanded, pruned);
   }
+  else { 
+    node aux;
 
-  node aux;
-
-  expanded++;
+    expanded++;
   
-  for(int i = 1; i < tsp.getN(); i++){
-    if(find(n.visited.begin(), n.visited.end(), i) == n.visited.end()){
-      aux = n;
-      aux.visited.push_back(i);
-      aux.currentWeight += tsp.getDistance(i, n.visited.back());
-      aux.bound = tsp.weightBound(aux.visited, aux.currentWeight);
-      alive_nodes.push(aux);
+    for(int i = 1; i < tsp.getN(); i++){
+      if(find(n.visited.begin(), n.visited.end(), i) == n.visited.end()){
+	aux = n;
+	aux.visited.push_back(i);
+	aux.currentWeight += tsp.getDistance(i, n.visited.back());
+	aux.bound = tsp.weightBound(aux.visited, aux.currentWeight);
+	alive_nodes.insert(aux);
+      }
     }
+
+    BandB(tsp, alive_nodes, bestSol, minimumWeight, maxsize, expanded, pruned);
   }
-
-  BandB(tsp, alive_nodes, bestSol, minimumWeight, maxsize, expanded);
-}
-
-void mostrarInfo(){
-  cerr << "Ejemplo: ./tsp ulysses16\n";
 }
 
 int main(int argc, char* argv[]){
@@ -205,12 +232,12 @@ int main(int argc, char* argv[]){
 
   node nod = {visited, 0, 0};
 
-  priority_queue<node> queue;
-  queue.push(nod);
+  set<node> alive;
+  alive.insert(nod);
 
-  int maxsize = 0, expanded = 0;
+  int maxsize = 0, expanded = 0, pruned = 0;
   
-  BandB(tsp, queue, bestSol, weight, maxsize, expanded);
+  BandB(tsp, alive, bestSol, weight, maxsize, expanded, pruned);
 
   t2 = clock();
   
@@ -222,13 +249,13 @@ int main(int argc, char* argv[]){
   cout << tsp.getN() << "\t" << (t2-t1)/(float)CLOCKS_PER_SEC << endl;
 
   cout << "Nodos expandidos: " << expanded << endl;
-  cout << "Podas: " << queue.size()+1 << endl;
+  cout << "Podas: " << alive.size()+pruned << endl;
   cout << "Tamaño máximo de la cola de nodos vivos: " << maxsize << endl;
   
   ofstream of(nombre_salida);
 
   if(!of){
-    cerr << "Error en la apertura de " << nombre_salida <<endl;
+    cerr << "Error en la apertura de " << nombre_salida << endl;
     mostrarInfo();
     exit(-1);
   }
