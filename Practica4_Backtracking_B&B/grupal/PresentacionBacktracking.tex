@@ -39,7 +39,7 @@
 
 \begin{document}
 
-\title{Algoritmo Backtracking: Viajante de Comercio}  
+\title{Algoritmos Branch and Bound y Backtracking: Viajante de Comercio}  
 \author{David Cabezas Berrido \\ Patricia Córdoba Hidalgo \\ Emilio José Hoyo Medina \\ Inmaculada Marín Carballo}
 \date{\today}
 
@@ -121,7 +121,7 @@ void backtracking(const TSP& tsp, const vector<int> &visited,
 \begin{frame}[fragile]\frametitle{Branch and Bound}
 
 \begin{lstlisting}[basicstyle=\tiny]
-  void BandB(const TSP& tsp, multiset<node> &alive_nodes, vector<int> &bestSol,
+void BandB(const TSP& tsp, multiset<node> &alive_nodes, vector<int> &bestSol,
   int& minimumWeight, int &maxsize, int &expanded, int &pruned){
 
   if(alive_nodes.empty()) return;
@@ -150,7 +150,7 @@ void backtracking(const TSP& tsp, const vector<int> &visited,
         aux = n;
         aux.visited.push_back(i);
         aux.currentWeight += tsp.getDistance(i, n.visited.back());
-        tsp.weightBound(aux.visited, aux.currentWeight);
+        aux.bound = tsp.weightBound(aux.visited, aux.currentWeight);
         alive_nodes.insert(aux);
       }
     }
@@ -206,6 +206,42 @@ void backtracking(const TSP& tsp, const vector<int> &visited,
       15 & 3.14079   & 6.45577   & 0.000202  \\ \hline
     \end{tabular}
   \end{table}
+\end{frame}
+
+\section{Recorridos}
+
+\begin{frame}{12 Ciudades}
+\begin{figure}[H]
+  \centering
+  \subfigure[Greedy. Peso = 10656]{\includegraphics[width=50mm]{graficas/Greedy/kroD12}}
+  \subfigure[Backtracking. Peso = 10047]{\includegraphics[width=50mm]{graficas/Backtracking/kroD12}}
+  \subfigure[Branch and Bound. Peso = 10047]{\includegraphics[width=50mm]{graficas/B&B/kroD12}}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Complejidad Branch and Bound para 12 ciudades}
+  \begin{itemize}
+\item Nodos expandidos: 32017
+\item Podas: 103296
+\item Nº máximo de nodos vivos simultáneamente: 79572
+\end{itemize}
+\end{frame}
+
+\begin{frame}{15 Ciudades}
+  \begin{figure}[H]
+  \centering
+  \subfigure[Greedy. Peso = 3653]{\includegraphics[width=50mm]{graficas/Greedy/pr15}}
+  \subfigure[Backtracking. Peso = 3579]{\includegraphics[width=50mm]{graficas/Backtracking/pr15}}
+  \subfigure[Branch and Bound. Peso = 3579]{\includegraphics[width=50mm]{graficas/B&B/pr15}}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Complejidad Branch and Bound para 15 ciudades}
+  \begin{itemize}
+\item Nodos expandidos: 131533
+\item Podas: 547585
+\item Nº máximo de nodos vivos simultáneamente: 546530
+\end{itemize}
 \end{frame}
 
 \section{Conclusión}
